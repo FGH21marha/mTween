@@ -342,7 +342,7 @@ using System.Collections.Generic;
         return this;
     }
 
-    public mTimeline LerpSpriteColor(SpriteRenderer sr, Color startColor, Color endColor)
+    public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor)
     {
         List<Color> colors = new List<Color>();
         colors.Add(startColor);
@@ -370,7 +370,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpSpriteColor(SpriteRenderer sr, Color startColor, Color endColor, AnimationCurve curve)
+    public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor, AnimationCurve curve)
     {
         List<Color> colors = new List<Color>();
         colors.Add(startColor);
@@ -398,19 +398,19 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpSpriteColor(SpriteRenderer sr, Gradient g)
+    public mTimeline LerpColor(Action<Color> sr, Gradient g)
     {
         ColorLerp newLerp = new ColorLerp(sr, g);
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpSpriteColor(SpriteRenderer sr, Gradient g, AnimationCurve curve)
+    public mTimeline LerpColor(Action<Color> sr, Gradient g, AnimationCurve curve)
     {
         ColorLerp newLerp = new ColorLerp(sr, g, curve);
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpSpriteColor(SpriteRenderer sr, List<Color> myColors)
+    public mTimeline LerpColor(Action<Color> sr, List<Color> myColors)
     {
         List<Color> colors = myColors;
         Gradient gradient = new Gradient();
@@ -435,7 +435,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpSpriteColor(SpriteRenderer sr, List<Color> myColors, AnimationCurve curve)
+    public mTimeline LerpColor(Action<Color> sr, List<Color> myColors, AnimationCurve curve)
     {
         List<Color> colors = myColors;
         Gradient gradient = new Gradient();
@@ -666,23 +666,24 @@ using System.Collections.Generic;
     }
     protected List<ScaleLerp> lerpScale = new List<ScaleLerp>();
 
+    
     protected struct ColorLerp
     {
-        public SpriteRenderer spriterenderer;
+        public Action<Color> color;
         public Gradient gradient;
         public AnimationCurve curve;
 
-        public ColorLerp(SpriteRenderer sr, Gradient gradient)
+        public ColorLerp(Action<Color> sr, Gradient gradient)
         {
-            this.spriterenderer = sr;
+            this.color = sr;
             this.gradient = gradient;
             this.curve = new AnimationCurve();
             curve.AddKey(0f, 0f);
             curve.AddKey(1f, 1f);
         }
-        public ColorLerp(SpriteRenderer sr, Gradient gradient, AnimationCurve curve)
+        public ColorLerp(Action<Color> sr, Gradient gradient, AnimationCurve curve)
         {
-            this.spriterenderer = sr;
+            this.color = sr;
             this.gradient = gradient;
             this.curve = curve;
         }
@@ -801,13 +802,13 @@ using System.Collections.Generic;
         {
             for (int i = 0; i < lerpColor.Count; i++)
             {
-                if (lerpColor[i].spriterenderer == null)
+                if (lerpColor[i].color == null)
                 {
                     lerpColor.Remove(lerpColor[i]);
                     i--;
                 }
 
-                lerpColor[i].spriterenderer.color = lerpColor[i].gradient.Evaluate(lerpColor[i].curve.Evaluate(progress));
+                lerpColor[i].color?.Invoke(lerpColor[i].gradient.Evaluate(lerpColor[i].curve.Evaluate(progress)));
             }
         }
 
