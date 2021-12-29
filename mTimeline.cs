@@ -666,7 +666,6 @@ using System.Collections.Generic;
     }
     protected List<ScaleLerp> lerpScale = new List<ScaleLerp>();
 
-    
     protected struct ColorLerp
     {
         public Action<Color> color;

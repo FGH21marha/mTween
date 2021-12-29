@@ -322,6 +322,8 @@ public class mTween : MonoBehaviour
                 myCall[i].AddDelayUnsafe(delay);
     }
 
+    public static int GetActiveEventsCount() => myCall.Count;
+
     private void UpdateQueuedEvents()
     {
         if (myCall.Count == 0) return;
