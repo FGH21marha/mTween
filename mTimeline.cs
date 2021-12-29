@@ -297,8 +297,7 @@ using System.Collections.Generic;
 
         return this;
     }
-    /*
-
+    
     /// <summary>
     /// Make a transform face a target transform continiously (instant)
     /// </summary>
@@ -313,30 +312,6 @@ using System.Collections.Generic;
         return this;
     }
 
-    /// <summary>
-    /// Make a transform face a target transform
-    /// </summary>
-    public mTimeline LerpRotateToTarget(Transform t, Transform Target)
-    {
-        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), false));
-        return this;
-    }
-    public mTimeline LerpRotateToTarget(Transform t, Transform Target, AnimationCurve curve)
-    {
-        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), false, curve));
-        return this;
-    }
-    public mTimeline LerpLocalRotateToTarget(Transform t, Transform Target)
-    {
-        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true));
-        return this;
-    }
-    public mTimeline LerpLocalRotateToTarget(Transform t, Transform Target, AnimationCurve curve)
-    {
-        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true, curve));
-        return this;
-    }
-    */
     public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor)
     {
         List<Color> colors = new List<Color>();
