@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 [Serializable] public class mTimeline
 {
-    string id_STRING;
-    int id_INT;
-    public string GetIDString() => id_STRING;
-    public int GetIDINT() => id_INT;
+    string ID;
+    public string GetID() => ID;
 
     Action onStart;
     Action<float> onUpdate01;
@@ -63,7 +61,7 @@ using System.Collections.Generic;
         curve.AddKey(1f, 1f);
         this.duration = duration;
         durationWithDelay = duration;
-        id_INT = id.GetInstanceID();
+        ID = id.GetInstanceID().ToString();
         unscaledProgress = 0f;
     }
     public mTimeline(string id, float duration)
@@ -73,10 +71,9 @@ using System.Collections.Generic;
         curve.AddKey(1f, 1f);
         this.duration = duration;
         durationWithDelay = duration;
-        id_STRING = id;
+        ID = id;
         unscaledProgress = 0f;
     }
-
 
     /// <summary>
     /// Returns progress based on input curve
@@ -240,12 +237,12 @@ using System.Collections.Generic;
     /// </summary>
     public mTimeline SetID(string id)
     {
-        id_STRING = id;
+        ID = id;
         return this;
     }
     public mTimeline SetID(GameObject id)
     {
-        id_INT = id.GetInstanceID();
+        ID = id.GetInstanceID().ToString();
         return this;
     }
 
