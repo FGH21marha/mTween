@@ -456,6 +456,17 @@ using System.Collections.Generic;
         return this;
     }
 
+    public mTimeline LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to)
+    {
+        lerpVector2.Add(new Vector2Lerp(a, from, to));
+        return this;
+    }
+    public mTimeline LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to, AnimationCurve curve)
+    {
+        lerpVector2.Add(new Vector2Lerp(a, from, to, curve));
+        return this;
+    }
+
     public mTimeline LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to)
     {
         lerpVector3.Add(new Vector3Lerp(a, from, to));
@@ -477,6 +488,58 @@ using System.Collections.Generic;
         lerpRot.Add(new RotationLerp(t, from, to, curve));
         return this;
     }
+
+    protected struct Vector2Lerp
+    {
+        public Action<Vector2> a;
+        public Vector2 start;
+        public Vector2 end;
+        public AnimationCurve curve;
+
+        public Vector2Lerp(Action<Vector2> a, Vector2 start, Vector2 end)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = new AnimationCurve();
+            curve.AddKey(0f, 0f);
+            curve.AddKey(1f, 1f);
+        }
+        public Vector2Lerp(Action<Vector2> a, Vector2 start, Vector2 end, AnimationCurve curve)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = curve;
+        }
+    }
+    protected List<Vector2Lerp> lerpVector2 = new List<Vector2Lerp>();
+
+    protected struct Vector3Lerp
+    {
+        public Action<Vector3> a;
+        public Vector3 start;
+        public Vector3 end;
+        public AnimationCurve curve;
+
+        public Vector3Lerp(Action<Vector3> a, Vector3 start, Vector3 end)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = new AnimationCurve();
+            curve.AddKey(0f, 0f);
+            curve.AddKey(1f, 1f);
+        }
+        public Vector3Lerp(Action<Vector3> a, Vector3 start, Vector3 end, AnimationCurve curve)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = curve;
+        }
+    }
+    protected List<Vector3Lerp> lerpVector3 = new List<Vector3Lerp>();
 
     protected struct RotationLerp
     {
@@ -526,32 +589,6 @@ using System.Collections.Generic;
         }
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
-
-    protected struct Vector3Lerp
-    {
-        public Action<Vector3> a;
-        public Vector3 start;
-        public Vector3 end;
-        public AnimationCurve curve;
-
-        public Vector3Lerp(Action<Vector3> a, Vector3 start, Vector3 end)
-        {
-            this.a = a;
-            this.start = start;
-            this.end = end;
-            this.curve = new AnimationCurve();
-            curve.AddKey(0f, 0f);
-            curve.AddKey(1f, 1f);
-        }
-        public Vector3Lerp(Action<Vector3> a, Vector3 start, Vector3 end, AnimationCurve curve)
-        {
-            this.a = a;
-            this.start = start;
-            this.end = end;
-            this.curve = curve;
-        }
-    }
-    protected List<Vector3Lerp> lerpVector3 = new List<Vector3Lerp>();
 
     protected struct ContinuousTargetLerp
     {
@@ -612,6 +649,20 @@ using System.Collections.Generic;
         onUpdate?.Invoke();
         onUpdate01?.Invoke(curve.Evaluate(Remap(Mathf.Clamp(unscaledProgress, 0f, duration), 0f, duration, 0, 1)));
         onUpdateFloat?.Invoke(progress);
+
+        if (lerpVector2.Count > 0)
+        {
+            for (int i = 0; i < lerpVector2.Count; i++)
+            {
+                if (lerpVector2[i].a == null)
+                {
+                    lerpVector2.Remove(lerpVector2[i]);
+                    i--;
+                }
+
+                lerpVector2[i].a?.Invoke(Vector2.LerpUnclamped(lerpVector2[i].start, lerpVector2[i].end, lerpVector2[i].curve.Evaluate(progress)));
+            }
+        }
 
         if (lerpVector3.Count > 0)
         {
