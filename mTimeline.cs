@@ -303,14 +303,12 @@ using System.Collections.Generic;
     /// </summary>
     public mTimeline FaceTargetContinuous(Transform t, Transform target)
     {
-        ContinuousTargetLerp newLerp = new ContinuousTargetLerp(t, target);
-        lerpTarget.Add(newLerp);
+        lerpTarget.Add(new ContinuousTargetLerp(t, target));
         return this;
     }
     public mTimeline FaceTargetContinuous(Transform t, Transform target, Vector3 worldUp)
     {
-        ContinuousTargetLerp newLerp = new ContinuousTargetLerp(t, target, worldUp);
-        lerpTarget.Add(newLerp);
+        lerpTarget.Add(new ContinuousTargetLerp(t, target, worldUp));
         return this;
     }
 
@@ -319,26 +317,22 @@ using System.Collections.Generic;
     /// </summary>
     public mTimeline LerpRotateToTarget(Transform t, Transform Target)
     {
-        RotationLerp newLerp = new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), false);
-        lerpRot.Add(newLerp);
+        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), false));
         return this;
     }
     public mTimeline LerpRotateToTarget(Transform t, Transform Target, AnimationCurve curve)
     {
-        RotationLerp newLerp = new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), false, curve);
-        lerpRot.Add(newLerp);
+        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), false, curve));
         return this;
     }
     public mTimeline LerpLocalRotateToTarget(Transform t, Transform Target)
     {
-        RotationLerp newLerp = new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true);
-        lerpRot.Add(newLerp);
+        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true));
         return this;
     }
     public mTimeline LerpLocalRotateToTarget(Transform t, Transform Target, AnimationCurve curve)
     {
-        RotationLerp newLerp = new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true, curve);
-        lerpRot.Add(newLerp);
+        lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true, curve));
         return this;
     }
 
@@ -461,210 +455,53 @@ using System.Collections.Generic;
         return this;
     }
 
-    public mTimeline LerpPosition(Transform t, Vector3 from, Vector3 to)
+    public mTimeline LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to)
     {
-        PositionLerp newLerp = new PositionLerp(t, from, to, false);
-
-        lerpPos.Add(newLerp);
-
+        lerpVector3.Add(new Vector3Lerp(a, from, to));
         return this;
     }
-    public mTimeline LerpLocalPosition(Transform t, Vector3 from, Vector3 to)
+    public mTimeline LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to, AnimationCurve curve)
     {
-        PositionLerp newLerp = new PositionLerp(t, from, to, true);
-
-        lerpPos.Add(newLerp);
-
-        return this;
-    }
-    public mTimeline LerpPosition(Transform t, Vector3 from, Vector3 to, AnimationCurve curve)
-    {
-        PositionLerp newLerp = new PositionLerp(t, from, to, false, curve);
-
-        lerpPos.Add(newLerp);
-
-        return this;
-    }
-    public mTimeline LerpLocalPosition(Transform t, Vector3 from, Vector3 to, AnimationCurve curve)
-    {
-        PositionLerp newLerp = new PositionLerp(t, from, to, true, curve);
-
-        lerpPos.Add(newLerp);
-
+        lerpVector3.Add(new Vector3Lerp(a, from, to, curve));
         return this;
     }
 
-    public mTimeline MoveTo(Transform t, Vector3 to, bool localSpace)
+    public mTimeline LerpRotationQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
     {
-        PositionLerp newLerp = new PositionLerp(t, to, localSpace);
-
-        lerpPos.Add(newLerp);
-
+        lerpRot.Add(new RotationLerp(t, from, to));
         return this;
     }
-    public mTimeline MoveTo(Transform t, Vector3 to, bool localSpace, AnimationCurve curve)
+    public mTimeline LerpRotationQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to, AnimationCurve curve)
     {
-        PositionLerp newLerp = new PositionLerp(t, to, localSpace, curve);
-
-        lerpPos.Add(newLerp);
-
+        lerpRot.Add(new RotationLerp(t, from, to, curve));
         return this;
     }
-
-    public mTimeline LerpRotation(Transform t, Quaternion from, Quaternion to)
-    {
-        RotationLerp newLerp = new RotationLerp(t, from, to, false);
-
-        lerpRot.Add(newLerp);
-
-        return this;
-    }
-    public mTimeline LerpLocalRotation(Transform t, Quaternion from, Quaternion to)
-    {
-        RotationLerp newLerp = new RotationLerp(t, from, to, true);
-
-        lerpRot.Add(newLerp);
-
-        return this;
-    }
-    public mTimeline LerpRotation(Transform t, Quaternion from, Quaternion to, AnimationCurve curve)
-    {
-        RotationLerp newLerp = new RotationLerp(t, from, to, false, curve);
-
-        lerpRot.Add(newLerp);
-
-        return this;
-    }
-    public mTimeline LerpLocalRotation(Transform t, Quaternion from, Quaternion to, AnimationCurve curve)
-    {
-        RotationLerp newLerp = new RotationLerp(t, from, to, true, curve);
-
-        lerpRot.Add(newLerp);
-
-        return this;
-    }
-
-    public mTimeline LerpScale(Transform t, Vector3 from, Vector3 to)
-    {
-        ScaleLerp newLerp = new ScaleLerp(t, from, to);
-
-        lerpScale.Add(newLerp);
-
-        return this;
-    }
-    public mTimeline LerpScale(Transform t, Vector3 from, Vector3 to, AnimationCurve curve)
-    {
-        ScaleLerp newLerp = new ScaleLerp(t, from, to, curve);
-
-        lerpScale.Add(newLerp);
-
-        return this;
-    }
-
-    protected struct PositionLerp
-    {
-        public Transform transform;
-        public Vector3 from;
-        public Vector3 to;
-        public bool localSpace;
-        public AnimationCurve curve;
-
-        public PositionLerp(Transform target, Vector3 from, Vector3 to, bool localSpace)
-        {
-            this.transform = target;
-            this.from = from;
-            this.to = to;
-            this.localSpace = localSpace;
-            curve = new AnimationCurve();
-            curve.AddKey(0f, 0f);
-            curve.AddKey(1f, 1f);
-        }
-
-        public PositionLerp(Transform target, Vector3 from, Vector3 to, bool localSpace, AnimationCurve curve)
-        {
-            this.transform = target;
-            this.from = from;
-            this.to = to;
-            this.localSpace = localSpace;
-            this.curve = curve;
-        }
-
-        public PositionLerp(Transform target, Vector3 to, bool localSpace)
-        {
-            this.transform = target;
-            this.from = localSpace ? target.localPosition : target.position;
-            this.to = to;
-            this.localSpace = localSpace;
-            curve = new AnimationCurve();
-            curve.AddKey(0f, 0f);
-            curve.AddKey(1f, 1f);
-        }
-
-        public PositionLerp(Transform target, Vector3 to, bool localSpace, AnimationCurve curve)
-        {
-            this.transform = target;
-            this.from = localSpace ? target.localPosition : target.position;
-            this.to = to;
-            this.localSpace = localSpace;
-            this.curve = curve;
-        }
-    }
-    protected List<PositionLerp> lerpPos = new List<PositionLerp>();
 
     protected struct RotationLerp
     {
-        public Transform transform;
+        public Action<Quaternion> a;
         public Quaternion from;
         public Quaternion to;
-        public bool localSpace;
         public AnimationCurve curve;
 
-        public RotationLerp(Transform target, Quaternion from, Quaternion to, bool localSpace, AnimationCurve curve)
+        public RotationLerp(Action<Quaternion> a, Quaternion from, Quaternion to, AnimationCurve curve)
         {
-            this.transform = target;
+            this.a = a;
             this.from = from;
             this.to = to;
-            this.localSpace = localSpace;
             this.curve = curve;
         }
-        public RotationLerp(Transform target, Quaternion from, Quaternion to, bool localSpace)
+        public RotationLerp(Action<Quaternion> a, Quaternion from, Quaternion to)
         {
-            this.transform = target;
+            this.a = a;
             this.from = from;
             this.to = to;
-            this.localSpace = localSpace;
             curve = new AnimationCurve();
             curve.AddKey(0f, 0f);
             curve.AddKey(1f, 1f);
         }
     }
     protected List<RotationLerp> lerpRot = new List<RotationLerp>();
-
-    protected struct ScaleLerp
-    {
-        public Transform transform;
-        public Vector3 from;
-        public Vector3 to;
-        public AnimationCurve curve;
-
-        public ScaleLerp(Transform target, Vector3 from, Vector3 to)
-        {
-            this.transform = target;
-            this.from = from;
-            this.to = to;
-            curve = new AnimationCurve();
-            curve.AddKey(0f, 0f);
-            curve.AddKey(1f, 1f);
-        }
-        public ScaleLerp(Transform target, Vector3 from, Vector3 to, AnimationCurve curve)
-        {
-            this.transform = target;
-            this.from = from;
-            this.to = to;
-            this.curve = curve;
-        }
-    }
-    protected List<ScaleLerp> lerpScale = new List<ScaleLerp>();
 
     protected struct ColorLerp
     {
@@ -688,6 +525,32 @@ using System.Collections.Generic;
         }
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
+
+    protected struct Vector3Lerp
+    {
+        public Action<Vector3> a;
+        public Vector3 start;
+        public Vector3 end;
+        public AnimationCurve curve;
+
+        public Vector3Lerp(Action<Vector3> a, Vector3 start, Vector3 end)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = new AnimationCurve();
+            curve.AddKey(0f, 0f);
+            curve.AddKey(1f, 1f);
+        }
+        public Vector3Lerp(Action<Vector3> a, Vector3 start, Vector3 end, AnimationCurve curve)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = curve;
+        }
+    }
+    protected List<Vector3Lerp> lerpVector3 = new List<Vector3Lerp>();
 
     protected struct ContinuousTargetLerp
     {
@@ -749,20 +612,17 @@ using System.Collections.Generic;
         onUpdate01?.Invoke(curve.Evaluate(Remap(Mathf.Clamp(unscaledProgress, 0f, duration), 0f, duration, 0, 1)));
         onUpdateFloat?.Invoke(progress);
 
-        if (lerpPos.Count > 0)
+        if (lerpVector3.Count > 0)
         {
-            for (int i = 0; i < lerpPos.Count; i++)
+            for (int i = 0; i < lerpVector3.Count; i++)
             {
-                if (lerpPos[i].transform == null)
+                if (lerpVector3[i].a == null)
                 {
-                    lerpPos.Remove(lerpPos[i]);
+                    lerpVector3.Remove(lerpVector3[i]);
                     i--;
                 }
 
-                if (!lerpPos[i].localSpace)
-                    lerpPos[i].transform.position = Vector3.LerpUnclamped(lerpPos[i].from, lerpPos[i].to, lerpPos[i].curve.Evaluate(progress));
-                else
-                    lerpPos[i].transform.localPosition = Vector3.LerpUnclamped(lerpPos[i].from, lerpPos[i].to, lerpPos[i].curve.Evaluate(progress));
+                lerpVector3[i].a?.Invoke(Vector3.LerpUnclamped(lerpVector3[i].start, lerpVector3[i].end, lerpVector3[i].curve.Evaluate(progress)));
             }
         }
 
@@ -780,20 +640,6 @@ using System.Collections.Generic;
                     lerpRot[i].transform.rotation = Quaternion.SlerpUnclamped(lerpRot[i].from, lerpRot[i].to, lerpRot[i].curve.Evaluate(progress));
                 else
                     lerpRot[i].transform.localRotation = Quaternion.SlerpUnclamped(lerpRot[i].from, lerpRot[i].to, lerpRot[i].curve.Evaluate(progress));
-            }
-        }
-
-        if (lerpScale.Count > 0)
-        {
-            for (int i = 0; i < lerpScale.Count; i++)
-            {
-                if (lerpScale[i].transform == null)
-                {
-                    lerpScale.Remove(lerpScale[i]);
-                    i--;
-                }
-
-                lerpScale[i].transform.localScale = Vector3.LerpUnclamped(lerpScale[i].from, lerpScale[i].to, lerpScale[i].curve.Evaluate(progress));
             }
         }
 
