@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -235,6 +236,14 @@ using System.Collections.Generic;
     /// <summary>
     /// Sets a unique ID for this event
     /// </summary>
+    public mTimeline SetID()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        System.Random random = new System.Random();
+
+        ID = new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray());
+        return this;
+    }
     public mTimeline SetID(string id)
     {
         ID = id;
