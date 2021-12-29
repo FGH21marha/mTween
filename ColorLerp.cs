@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ColorLerp<T, Y>
+public class ColorLerp<T>
 {
     Material mat;
     string matColor;
@@ -13,17 +13,22 @@ public class ColorLerp<T, Y>
 
     public ColorLerp(T type, string name)
     {
+        matColor = name;
+        UpdateMaterial(type);
+    }
+
+    public ColorLerp(T type) => UpdateMaterial(type);
+
+    private void UpdateMaterial(T type)
+    {
         if (type is Material)
-        {
             mat = type as Material;
-            matColor = name;
-        }
 
         if (type is SpriteRenderer)
             spriteRend = type as SpriteRenderer;
     }
 
-    public ColorLerp<T, Y> SetColor(Color from, Color to)
+    public ColorLerp<T> SetColor(Color from, Color to)
     {
         this.from = from;
         this.to = to;
