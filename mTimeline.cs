@@ -297,6 +297,7 @@ using System.Collections.Generic;
 
         return this;
     }
+    /*
 
     /// <summary>
     /// Make a transform face a target transform continiously (instant)
@@ -335,7 +336,7 @@ using System.Collections.Generic;
         lerpRot.Add(new RotationLerp(t, t.rotation, Quaternion.FromToRotation(t.forward, Target.position - t.position), true, curve));
         return this;
     }
-
+    */
     public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor)
     {
         List<Color> colors = new List<Color>();
@@ -466,12 +467,12 @@ using System.Collections.Generic;
         return this;
     }
 
-    public mTimeline LerpRotationQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
+    public mTimeline LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
     {
         lerpRot.Add(new RotationLerp(t, from, to));
         return this;
     }
-    public mTimeline LerpRotationQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to, AnimationCurve curve)
+    public mTimeline LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to, AnimationCurve curve)
     {
         lerpRot.Add(new RotationLerp(t, from, to, curve));
         return this;
@@ -630,16 +631,13 @@ using System.Collections.Generic;
         {
             for (int i = 0; i < lerpRot.Count; i++)
             {
-                if (lerpRot[i].transform == null)
+                if (lerpRot[i].a == null)
                 {
                     lerpRot.Remove(lerpRot[i]);
                     i--;
                 }
-
-                if (!lerpRot[i].localSpace)
-                    lerpRot[i].transform.rotation = Quaternion.SlerpUnclamped(lerpRot[i].from, lerpRot[i].to, lerpRot[i].curve.Evaluate(progress));
-                else
-                    lerpRot[i].transform.localRotation = Quaternion.SlerpUnclamped(lerpRot[i].from, lerpRot[i].to, lerpRot[i].curve.Evaluate(progress));
+                
+                lerpRot[i].a?.Invoke(Quaternion.SlerpUnclamped(lerpRot[i].from, lerpRot[i].to, lerpRot[i].curve.Evaluate(progress)));
             }
         }
 
