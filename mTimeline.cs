@@ -430,6 +430,110 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
+    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes)
+    {
+        Gradient gradient = new Gradient();
+        GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colortimes.Count];
+
+        for (int i = 0; i < colorKeys.Length; i++)
+        {
+            colorKeys[i].color = colortimes[i].color;
+            colorKeys[i].time = colortimes[i].time / duration;
+        }
+        for (int i = 0; i < alphaKeys.Length; i++)
+        {
+            alphaKeys[i].alpha = colortimes[i].color.a;
+            alphaKeys[i].time = colortimes[i].time / duration;
+        }
+        
+
+        gradient.SetKeys(colorKeys, alphaKeys);
+
+        ColorLerp newLerp = new ColorLerp(sr, gradient);
+        lerpColor.Add(newLerp);
+        return this;
+    }
+    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes, AnimationCurve curve)
+    {
+        Gradient gradient = new Gradient();
+        GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colortimes.Count];
+
+        for (int i = 0; i < colorKeys.Length; i++)
+        {
+            colorKeys[i].color = colortimes[i].color;
+            colorKeys[i].time = colortimes[i].time / duration;
+        }
+
+        for (int i = 0; i < alphaKeys.Length; i++)
+        {
+            alphaKeys[i].alpha = colortimes[i].color.a;
+            alphaKeys[i].time = colortimes[i].time / duration;
+        }
+
+        gradient.SetKeys(colorKeys, alphaKeys);
+
+        ColorLerp newLerp = new ColorLerp(sr, gradient, curve);
+        lerpColor.Add(newLerp);
+        return this;
+    }
+    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes, bool scaled)
+    {
+        Gradient gradient = new Gradient();
+        GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colortimes.Count];
+
+        float divider = duration;
+        if (scaled)
+            divider = 1f;
+
+        for (int i = 0; i < colorKeys.Length; i++)
+        {
+            colorKeys[i].color = colortimes[i].color;
+            colorKeys[i].time = colortimes[i].time / divider;
+        }
+        for (int i = 0; i < alphaKeys.Length; i++)
+        {
+            alphaKeys[i].alpha = colortimes[i].color.a;
+            alphaKeys[i].time = colortimes[i].time / divider;
+        }
+
+
+        gradient.SetKeys(colorKeys, alphaKeys);
+
+        ColorLerp newLerp = new ColorLerp(sr, gradient);
+        lerpColor.Add(newLerp);
+        return this;
+    }
+    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes, bool scaled, AnimationCurve curve)
+    {
+        Gradient gradient = new Gradient();
+        GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colortimes.Count];
+
+        float divider = duration;
+        if (scaled)
+            divider = 1f;
+
+        for (int i = 0; i < colorKeys.Length; i++)
+        {
+            colorKeys[i].color = colortimes[i].color;
+            colorKeys[i].time = colortimes[i].time / divider;
+        }
+
+        for (int i = 0; i < alphaKeys.Length; i++)
+        {
+            alphaKeys[i].alpha = colortimes[i].color.a;
+            alphaKeys[i].time = colortimes[i].time / divider;
+        }
+
+        gradient.SetKeys(colorKeys, alphaKeys);
+
+        ColorLerp newLerp = new ColorLerp(sr, gradient, curve);
+        lerpColor.Add(newLerp);
+        return this;
+    }
 
     public mTimeline LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to)
     {
@@ -564,6 +668,7 @@ using System.Collections.Generic;
         }
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
+    
 
     protected struct ContinuousTargetLerp
     {
@@ -757,5 +862,18 @@ using System.Collections.Generic;
     float Remap(float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
+    }
+}
+
+[Serializable]
+public struct ColorTimes
+{
+    public Color color;
+    public float time;
+
+    public ColorTimes(Color c, float t)
+    {
+        this.color = c;
+        this.time = t;
     }
 }
