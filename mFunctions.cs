@@ -1304,7 +1304,7 @@ public partial class Tween
 
     #region Audio operations
     /// <summary>
-    /// Lerps Audio volume towards value
+    /// Lerps AudioSource volume towards value
     /// </summary>
     public Tween VolumeTo(AudioSource t, float to)
     {
@@ -1328,7 +1328,7 @@ public partial class Tween
     }
 
     /// <summary>
-    /// Lerps Audio pitch towards value
+    /// Lerps AudioSource pitch towards value
     /// </summary>
     public Tween PitchTo(AudioSource t, float to)
     {

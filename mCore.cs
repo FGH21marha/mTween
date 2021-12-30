@@ -102,7 +102,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Cancel tween immediately
+    /// Cancels the tween
     /// </summary>
     public Tween Cancel()
     {
@@ -137,7 +137,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Plays the tween in reverse
+    /// Play the tween in reverse
     /// </summary>
     public Tween PlayReversed()
     {
@@ -181,17 +181,17 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action on full tween completion
+    /// Triggers an action on tween completion
     /// </summary>
     public Tween SetOnComplete(Action onComplete)
     {
         this.onComplete = onComplete;
         return this;
     }
-    public Tween SetOnComplete(Action onComplete, bool triggerOnComplete)
+    public Tween SetOnComplete(Action onComplete, bool triggerOnCancel)
     {
         this.onComplete = onComplete;
-        completeTriggeredOnCancel = triggerOnComplete;
+        completeTriggeredOnCancel = triggerOnCancel;
         return this;
     }
 
@@ -223,17 +223,17 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action on partial tween completion, e.g. when it has done a full cycle and is going to repeat
+    /// Triggers an action on repeat completion
     /// </summary>
     public Tween SetOnRepeat(Action onFinished)
     {
         this.onCompletedRun = onFinished;
         return this;
     }
-    public Tween SetOnRepeat(Action onFinished, bool triggerOnComplete)
+    public Tween SetOnRepeat(Action onFinished, bool triggerOnCanceled)
     {
         this.onCompletedRun = onFinished;
-        completeLoopTriggeredOnCancel = triggerOnComplete;
+        completeLoopTriggeredOnCancel = triggerOnCanceled;
         return this;
     }
 
@@ -336,7 +336,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Interpolate from color to color using two ore more colors or a gradient
+    /// Interpolate Color
     /// </summary>
     public Tween LerpColor(Action<Color> sr, Color startColor, Color endColor)
     {
@@ -1037,8 +1037,10 @@ using System.Collections.Generic;
     }
 }
 
-[Serializable]
-public struct ColorTimes
+/// <summary>
+/// Used to add new keyframes to ColorLerp gradient
+/// </summary>
+[Serializable] public struct ColorTimes
 {
     public Color color;
     public float time;
