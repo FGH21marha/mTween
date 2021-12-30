@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
@@ -564,6 +563,178 @@ public partial class mTimeline
                 new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
+    #endregion
+
+    #region Color operations
+    
+    /// <summary>
+    /// Lerps Image Color towards value
+    /// </summary>
+    public mTimeline ColorTo(Image t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
+        return this;
+    }
+    public mTimeline ColorTo(Image t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
+        return this;
+    }
+    public mTimeline ColorTo(Image t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
+        return this;
+    }
+    public mTimeline ColorTo(Image t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps RawImage Color towards value
+    /// </summary>
+    public mTimeline ColorTo(RawImage t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
+        return this;
+    }
+    public mTimeline ColorTo(RawImage t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
+        return this;
+    }
+    public mTimeline ColorTo(RawImage t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
+        return this;
+    }
+    public mTimeline ColorTo(RawImage t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps SpriteRenderer Color towards value
+    /// </summary>
+    public mTimeline ColorTo(SpriteRenderer t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
+        return this;
+    }
+    public mTimeline ColorTo(SpriteRenderer t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
+        return this;
+    }
+    public mTimeline ColorTo(SpriteRenderer t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
+        return this;
+    }
+    public mTimeline ColorTo(SpriteRenderer t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+
+    #endregion
+
+    #region Material operations
+
+    /// <summary>
+    /// Lerps Material Color towards value
+    /// </summary>
+    public mTimeline MaterialValueTo(Material t, string value, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(t.color, to)));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(t.color, to), curve));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(from, to)));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(from, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Material Float towards value
+    /// </summary>
+    public mTimeline MaterialValueTo(Material t, string value, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), t.GetFloat(value), to));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), t.GetFloat(value), to, curve));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), from, to));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Material Vector towards value
+    /// </summary>
+    public mTimeline MaterialValueTo(Material t, string value, Vector2 to)
+    {
+        lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), t.GetVector(value), to));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector2 to, AnimationCurve curve)
+    {
+        lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), t.GetVector(value), to, curve));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector2 from, Vector2 to)
+    {
+        lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), from, to));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector2 from, Vector2 to, AnimationCurve curve)
+    {
+        lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), from, to, curve));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector3 to)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), t.GetVector(value), to));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector3 to, AnimationCurve curve)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), t.GetVector(value), to, curve));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector3 from, Vector3 to)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), from, to));
+        return this;
+    }
+    public mTimeline MaterialValueTo(Material t, string value, Vector3 from, Vector3 to, AnimationCurve curve)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), from, to, curve));
+        return this;
+    }
+
     #endregion
 
     #region TextMesh operations
