@@ -286,6 +286,9 @@ using System.Collections.Generic;
         return this;
     }
 
+    /// <summary>
+    /// Resets list of custom actions, DO NOT USE UNLESS NECESSARY
+    /// </summary>
     public mTimeline ResetCustomActionsList()
     {
         if (completedCustomActions.Count == 0f) return this;
@@ -295,20 +298,6 @@ using System.Collections.Generic;
 
         completedCustomActions.Clear();
 
-        return this;
-    }
-    
-    /// <summary>
-    /// Make a transform face a target transform continiously (instant)
-    /// </summary>
-    public mTimeline FaceTargetContinuous(Transform t, Transform target)
-    {
-        lerpTarget.Add(new ContinuousTargetLerp(t, target));
-        return this;
-    }
-    public mTimeline FaceTargetContinuous(Transform t, Transform target, Vector3 worldUp)
-    {
-        lerpTarget.Add(new ContinuousTargetLerp(t, target, worldUp));
         return this;
     }
 
@@ -568,6 +557,50 @@ using System.Collections.Generic;
         return this;
     }
 
+    /// <summary>
+    /// Rotates Transform to face a target
+    /// </summary>
+    public mTimeline RotateTowardsTarget(Transform follower, Transform Target)
+    {
+        Quaternion lookDir = Quaternion.FromToRotation(follower.forward, Target.position - follower.position);
+
+        mTimeline t = mTween.NewTimeline(GetID(), duration)
+            .LerpQuaternion((i) => follower.rotation = i, follower.rotation, lookDir);
+
+        t.SetOnComplete(()=> childTimelines.Remove(t));
+
+        childTimelines.Add(t);
+
+        return this;
+    }
+    public mTimeline RotateTowardsTarget(Transform follower, Transform Target, AnimationCurve curve)
+    {
+        Quaternion lookDir = Quaternion.FromToRotation(follower.forward, Target.position - follower.position);
+
+        mTimeline t = mTween.NewTimeline(GetID(), duration)
+            .LerpQuaternion((i) => follower.rotation = i, follower.rotation, lookDir, curve);
+
+        t.SetOnComplete(() => childTimelines.Remove(t));
+
+        childTimelines.Add(t);
+
+        return this;
+    }
+
+    /// <summary>
+    /// Make a transform face a target transform continiously (instant)
+    /// </summary>
+    public mTimeline FaceTargetContinuous(Transform t, Transform target)
+    {
+        lerpTarget.Add(new ContinuousTargetLerp(t, target));
+        return this;
+    }
+    public mTimeline FaceTargetContinuous(Transform t, Transform target, Vector3 worldUp)
+    {
+        lerpTarget.Add(new ContinuousTargetLerp(t, target, worldUp));
+        return this;
+    }
+
     protected struct Vector2Lerp
     {
         public Action<Vector2> a;
@@ -713,6 +746,8 @@ using System.Collections.Generic;
     protected List<CustomAction> customActions = new List<CustomAction>();
     protected List<CustomAction> completedCustomActions = new List<CustomAction>();
 
+    protected List<mTimeline> childTimelines = new List<mTimeline>();
+
     public void Start() 
     {
         canceled = false;
@@ -820,9 +855,12 @@ using System.Collections.Generic;
             }
         }
     }
-    public void OnCancelEvent()
+    public void OnCancel()
     {
         if (canceled) return;
+
+        foreach (mTimeline i in childTimelines)
+            i.Cancel();
 
         onCancel?.Invoke();
 
@@ -832,23 +870,33 @@ using System.Collections.Generic;
         if (completeLoopTriggeredOnCancel)
             onCompletedRun?.Invoke();
     }
-    public void PauseEvent(float duration)
+    public void Pause(float duration)
     {
         if (canceled) return;
 
+        foreach (mTimeline i in childTimelines)
+            i.Pause();
+
         pauseTime = duration;
         paused = true;
+        onPause?.Invoke();
     }
-    public void PauseEvent()
+    public void Pause()
     {
         if (canceled) return;
+
+        foreach (mTimeline i in childTimelines)
+            i.Pause();
 
         paused = true;
         onPause?.Invoke();
     }
-    public void ContinueEvent()
+    public void Resume()
     {
         if (canceled) return;
+
+        foreach (mTimeline i in childTimelines)
+            i.Resume();
 
         paused = false;
         onContinue?.Invoke();
@@ -856,8 +904,20 @@ using System.Collections.Generic;
     public void UpdateTime() => unscaledProgress += Time.deltaTime;
     public void UpdatePauseTime() => unscaledPauseTime += Time.deltaTime;
     public void UpdateIntervalTime() => unscaledIntervalTime += Time.deltaTime;
-    public void AddDelay(float additionalDelay) => durationWithDelay += additionalDelay;
-    public void AddDelayUnsafe(float additionalDelay) => duration += additionalDelay;
+    public void AddDelay(float additionalDelay)
+    {
+        durationWithDelay += additionalDelay;
+
+        foreach (mTimeline i in childTimelines)
+            i.AddDelay(additionalDelay);
+    }
+    public void AddDelayUnsafe(float additionalDelay)
+    {
+        duration += additionalDelay;
+
+        foreach (mTimeline i in childTimelines)
+            i.AddDelayUnsafe(additionalDelay);
+    }
 
     float Remap(float s, float a1, float a2, float b1, float b2)
     {

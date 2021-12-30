@@ -160,7 +160,7 @@ public class mTween : MonoBehaviour
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
             {
-                myCall[i].OnCancelEvent();
+                myCall[i].Cancel();
                 myCall[i].Cancel();
             }
     }
@@ -173,7 +173,7 @@ public class mTween : MonoBehaviour
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
             {
-                myCall[i].OnCancelEvent();
+                myCall[i].Cancel();
                 myCall[i].Cancel();
             }
     }
@@ -186,7 +186,7 @@ public class mTween : MonoBehaviour
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
             {
-                myCall[i].OnCancelEvent();
+                myCall[i].Cancel();
                 myCall.Add(new mTimeline(t).SetOnComplete(() => myCall[i].Cancel()));
             }
     }
@@ -199,7 +199,7 @@ public class mTween : MonoBehaviour
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
             {
-                myCall[i].OnCancelEvent();
+                myCall[i].Cancel();
                 myCall.Add(new mTimeline(t).SetOnComplete(() => myCall[i].Cancel()));
             }
     }
@@ -211,7 +211,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id && !myCall[i].paused)
-                myCall[i].PauseEvent(duration);
+                myCall[i].Pause(duration);
     }
 
     /// <summary>
@@ -221,7 +221,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString() && !myCall[i].paused)
-                myCall[i].PauseEvent(duration);
+                myCall[i].Pause(duration);
     }
 
     /// <summary>
@@ -231,7 +231,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id && !myCall[i].paused)
-                myCall[i].PauseEvent();
+                myCall[i].Pause();
     }
 
     /// <summary>
@@ -241,7 +241,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString() && !myCall[i].paused)
-                myCall[i].PauseEvent();
+                myCall[i].Pause();
     }
 
     /// <summary>
@@ -251,7 +251,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id && myCall[i].paused)
-                myCall[i].ContinueEvent();
+                myCall[i].Resume();
     }
 
     /// <summary>
@@ -261,7 +261,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString() && myCall[i].paused)
-                myCall[i].ContinueEvent();
+                myCall[i].Resume();
     }
 
     /// <summary>
@@ -270,7 +270,7 @@ public class mTween : MonoBehaviour
     public static void PauseAllEvents()
     {
         for (int i = 0; i < myCall.Count; i++)
-            myCall[i].PauseEvent();
+            myCall[i].Pause();
     }
 
     /// <summary>
@@ -279,7 +279,7 @@ public class mTween : MonoBehaviour
     public static void ContinueAllEvents()
     {
         for (int i = 0; i < myCall.Count; i++)
-            myCall[i].ContinueEvent();
+            myCall[i].Resume();
     }
 
     /// <summary>
@@ -344,7 +344,7 @@ public class mTween : MonoBehaviour
                 if (myCall[i].unscaledPauseTime >= myCall[i].pauseTime && myCall[i].pauseTime != 0f)
                 {
                     myCall[i].unscaledPauseTime = 0f;
-                    myCall[i].ContinueEvent();
+                    myCall[i].Resume();
                 }
                 continue;
             }
