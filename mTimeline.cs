@@ -812,7 +812,6 @@ using System.Collections.Generic;
     }
     public void CompletedRun()
     {
-        ResetLerps();
         onCompletedRun?.Invoke();
     }
     public void Update()
