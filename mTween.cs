@@ -44,14 +44,14 @@ public class mTween : MonoBehaviour
 
     #region New DelayedCall Instance
 
-    private static List<mTimeline> myCall = new List<mTimeline>();
+    private static List<Tween> myCall = new List<Tween>();
 
     /// <summary>
     /// Queue new event to be called after a period of time, returns call onComplete and onUpdate
     /// </summary>
-    public static mTimeline NewTimeline(float time)
+    public static Tween NewTimeline(float time)
     {
-        mTimeline i = new mTimeline(time).SetID();
+        Tween i = new Tween(time).SetID();
         myCall.Add(i);
 
         if(instance == null)
@@ -67,9 +67,9 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Queue new event to be called after a period of time, returns call onComplete and onUpdate
     /// </summary>
-    public static mTimeline NewTimeline(GameObject id, float time)
+    public static Tween NewTimeline(GameObject id, float time)
     {
-        mTimeline i = new mTimeline(id, time);
+        Tween i = new Tween(id, time);
         myCall.Add(i);
 
         if (instance == null)
@@ -85,9 +85,9 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Queue new event to be called after a period of time, returns call onComplete and onUpdate
     /// </summary>
-    public static mTimeline NewTimeline(string id, float time)
+    public static Tween NewTimeline(string id, float time)
     {
-        mTimeline i = new mTimeline(id, time);
+        Tween i = new Tween(id, time);
         myCall.Add(i);
 
         if (instance == null)
@@ -103,9 +103,9 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Delayed call that triggers an event after x amount of time
     /// </summary>
-    public static mTimeline DelayedCall(float time, Action OnComplete)
+    public static Tween DelayedCall(float time, Action OnComplete)
     {
-        mTimeline i = new mTimeline(time);
+        Tween i = new Tween(time);
         i.SetOnComplete(OnComplete);
         myCall.Add(i);
 
@@ -122,9 +122,9 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Delayed call that triggers an event after x amount of time
     /// </summary>
-    public static mTimeline DelayedCall(GameObject id, float time, Action OnComplete)
+    public static Tween DelayedCall(GameObject id, float time, Action OnComplete)
     {
-        mTimeline i = new mTimeline(id, time).SetOnComplete(OnComplete);
+        Tween i = new Tween(id, time).SetOnComplete(OnComplete);
         myCall.Add(i);
 
         if (instance == null)
@@ -187,7 +187,7 @@ public class mTween : MonoBehaviour
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
             {
                 myCall[i].Cancel();
-                myCall.Add(new mTimeline(t).SetOnComplete(() => myCall[i].Cancel()));
+                myCall.Add(new Tween(t).SetOnComplete(() => myCall[i].Cancel()));
             }
     }
 
@@ -200,7 +200,7 @@ public class mTween : MonoBehaviour
             if (myCall[i].GetID() == id)
             {
                 myCall[i].Cancel();
-                myCall.Add(new mTimeline(t).SetOnComplete(() => myCall[i].Cancel()));
+                myCall.Add(new Tween(t).SetOnComplete(() => myCall[i].Cancel()));
             }
     }
 

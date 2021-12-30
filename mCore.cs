@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 
-[Serializable] public partial class mTimeline
+[Serializable] public partial class Tween
 {
     string ID;
     public string GetID() => ID;
@@ -45,9 +45,9 @@ using System.Collections.Generic;
     public AnimationCurve curve;
 
     /// <summary>
-    /// Creates a new delayed action with a duration
+    /// Creates a new tween with a duration
     /// </summary>
-    public mTimeline(float duration)
+    public Tween(float duration)
     {
         curve = new AnimationCurve();
         curve.AddKey(0f, 0f);
@@ -56,7 +56,7 @@ using System.Collections.Generic;
         durationWithDelay = duration;
         unscaledProgress = 0f;
     }
-    public mTimeline(GameObject id, float duration)
+    public Tween(GameObject id, float duration)
     {
         curve = new AnimationCurve();
         curve.AddKey(0f, 0f);
@@ -66,7 +66,7 @@ using System.Collections.Generic;
         ID = id.GetInstanceID().ToString();
         unscaledProgress = 0f;
     }
-    public mTimeline(string id, float duration)
+    public Tween(string id, float duration)
     {
         curve = new AnimationCurve();
         curve.AddKey(0f, 0f);
@@ -80,7 +80,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Returns progress based on input curve
     /// </summary>
-    public mTimeline SetCurve(AnimationCurve newCurve)
+    public Tween SetCurve(AnimationCurve newCurve)
     {
         curve = newCurve;
         return this;
@@ -89,12 +89,12 @@ using System.Collections.Generic;
     /// <summary>
     /// Repeats the action
     /// </summary>
-    public mTimeline Repeat()
+    public Tween Repeat()
     {
         repeat = true;
         return this;
     }
-    public mTimeline Repeat(int n)
+    public Tween Repeat(int n)
     {
         repeat = true;
         repeatCount = n;
@@ -104,7 +104,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Cancel event immediately
     /// </summary>
-    public mTimeline Cancel()
+    public Tween Cancel()
     {
         this.canceled = true;
 
@@ -116,7 +116,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Executes the event n times
     /// </summary>
-    public mTimeline ExecuteNTimes(int n)
+    public Tween ExecuteNTimes(int n)
     {
         repeat = true;
         repeatCount = n - 1;
@@ -126,7 +126,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Delay between action repetition
     /// </summary>
-    public mTimeline SetInterval(float duration)
+    public Tween SetInterval(float duration)
     {
         interval = true;
         if (duration > 0f)
@@ -139,7 +139,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Plays the event in reverse
     /// </summary>
-    public mTimeline PlayReversed()
+    public Tween PlayReversed()
     {
         float a = min;
         float b = max;
@@ -151,7 +151,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action at the start of an event
     /// </summary>
-    public mTimeline SetOnStart(Action onStart)
+    public Tween SetOnStart(Action onStart)
     {
         this.onStart = onStart;
         return this;
@@ -160,7 +160,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action for every update of the event. Returns progress from 0 to 1 for the duration of the event
     /// </summary>
-    public mTimeline SetOnUpdate01(Action<float> onUpdate)
+    public Tween SetOnUpdate01(Action<float> onUpdate)
     {
         onUpdate01 = onUpdate;
         return this;
@@ -169,12 +169,12 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action for every update of the event
     /// </summary>
-    public mTimeline SetOnUpdate(Action onUpdate)
+    public Tween SetOnUpdate(Action onUpdate)
     {
         this.onUpdate = onUpdate;
         return this;
     }
-    public mTimeline SetOnUpdate(Action<float> onUpdate)
+    public Tween SetOnUpdate(Action<float> onUpdate)
     {
         onUpdateFloat = onUpdate;
         return this;
@@ -183,12 +183,12 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action on full event completion
     /// </summary>
-    public mTimeline SetOnComplete(Action onComplete)
+    public Tween SetOnComplete(Action onComplete)
     {
         this.onComplete = onComplete;
         return this;
     }
-    public mTimeline SetOnComplete(Action onComplete, bool triggerOnComplete)
+    public Tween SetOnComplete(Action onComplete, bool triggerOnComplete)
     {
         this.onComplete = onComplete;
         completeTriggeredOnCancel = triggerOnComplete;
@@ -198,7 +198,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action if the event is canceled
     /// </summary>
-    public mTimeline SetOnCancel(Action onCancel)
+    public Tween SetOnCancel(Action onCancel)
     {
         this.onCancel = onCancel;
         return this;
@@ -207,7 +207,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action if the event is paused
     /// </summary>
-    public mTimeline SetOnPause(Action onPause)
+    public Tween SetOnPause(Action onPause)
     {
         this.onPause = onPause;
         return this;
@@ -216,7 +216,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action if the event is continued
     /// </summary>
-    public mTimeline SetOnContinue(Action onContinue)
+    public Tween SetOnContinue(Action onContinue)
     {
         this.onContinue = onContinue;
         return this;
@@ -225,12 +225,12 @@ using System.Collections.Generic;
     /// <summary>
     /// Triggers an action on partial event completion, e.g. when it has done a full cycle and is going to repeat
     /// </summary>
-    public mTimeline SetOnRepeat(Action onFinished)
+    public Tween SetOnRepeat(Action onFinished)
     {
         this.onCompletedRun = onFinished;
         return this;
     }
-    public mTimeline SetOnRepeat(Action onFinished, bool triggerOnComplete)
+    public Tween SetOnRepeat(Action onFinished, bool triggerOnComplete)
     {
         this.onCompletedRun = onFinished;
         completeLoopTriggeredOnCancel = triggerOnComplete;
@@ -240,7 +240,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Does not restore the state of the tweened object when the event is canceled
     /// </summary>
-    public mTimeline DontRestoreOnCancel()
+    public Tween DontRestoreOnCancel()
     {
         restoreOnCancel = false;
         return this;
@@ -249,7 +249,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Sets a unique ID for this event
     /// </summary>
-    public mTimeline SetID()
+    public Tween SetID()
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         System.Random random = new System.Random();
@@ -257,12 +257,12 @@ using System.Collections.Generic;
         ID = new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray());
         return this;
     }
-    public mTimeline SetID(string id)
+    public Tween SetID(string id)
     {
         ID = id;
         return this;
     }
-    public mTimeline SetID(GameObject id)
+    public Tween SetID(GameObject id)
     {
         ID = id.GetInstanceID().ToString();
         return this;
@@ -271,7 +271,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Set progress min max. onUpdate returns progress from the new min max values
     /// </summary>
-    public mTimeline SetMinMax(float min, float max)
+    public Tween SetMinMax(float min, float max)
     {
         this.min = min;
         this.max = max;
@@ -281,7 +281,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Calls action after t seconds during the event
     /// </summary>
-    public mTimeline CallOnTime(float t, Action a)
+    public Tween CallOnTime(float t, Action a)
     {
         if (t >= 0f && a != null)
             customActions.Add(new CustomAction(t, a));
@@ -291,7 +291,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Calls action after t seconds during the event, scaling determines if the time used is scaled (0 to 1) or unscaled time (0 to event length)
     /// </summary>
-    public mTimeline CallOnTime(float t, Action a, bool scaling)
+    public Tween CallOnTime(float t, Action a, bool scaling)
     {
         if (t >= 0f && a != null)
             customActions.Add(new CustomAction(t, a, scaling));
@@ -302,7 +302,7 @@ using System.Collections.Generic;
     /// <summary>
     /// Resets list of custom actions, DO NOT USE UNLESS NECESSARY
     /// </summary>
-    public mTimeline ResetCustomActionsList()
+    public Tween ResetCustomActionsList()
     {
         if (completedCustomActions.Count == 0f) return this;
 
@@ -332,7 +332,7 @@ using System.Collections.Generic;
             i.Reset();
     }
 
-    public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor)
+    public Tween LerpColor(Action<Color> sr, Color startColor, Color endColor)
     {
         List<Color> colors = new List<Color>();
         colors.Add(startColor);
@@ -360,7 +360,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor, AnimationCurve curve)
+    public Tween LerpColor(Action<Color> sr, Color startColor, Color endColor, AnimationCurve curve)
     {
         List<Color> colors = new List<Color>();
         colors.Add(startColor);
@@ -388,19 +388,19 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, Gradient g)
+    public Tween LerpColor(Action<Color> sr, Gradient g)
     {
         ColorLerp newLerp = new ColorLerp(sr, g);
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, Gradient g, AnimationCurve curve)
+    public Tween LerpColor(Action<Color> sr, Gradient g, AnimationCurve curve)
     {
         ColorLerp newLerp = new ColorLerp(sr, g, curve);
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, List<Color> myColors)
+    public Tween LerpColor(Action<Color> sr, List<Color> myColors)
     {
         List<Color> colors = myColors;
         Gradient gradient = new Gradient();
@@ -425,7 +425,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, List<Color> myColors, AnimationCurve curve)
+    public Tween LerpColor(Action<Color> sr, List<Color> myColors, AnimationCurve curve)
     {
         List<Color> colors = myColors;
         Gradient gradient = new Gradient();
@@ -450,7 +450,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes)
+    public Tween LerpColor(Action<Color> sr, List<ColorTimes> colortimes)
     {
         Gradient gradient = new Gradient();
         GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
@@ -474,7 +474,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes, AnimationCurve curve)
+    public Tween LerpColor(Action<Color> sr, List<ColorTimes> colortimes, AnimationCurve curve)
     {
         Gradient gradient = new Gradient();
         GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
@@ -498,7 +498,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes, bool scaled)
+    public Tween LerpColor(Action<Color> sr, List<ColorTimes> colortimes, bool scaled)
     {
         Gradient gradient = new Gradient();
         GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
@@ -526,7 +526,7 @@ using System.Collections.Generic;
         lerpColor.Add(newLerp);
         return this;
     }
-    public mTimeline LerpColor(Action<Color> sr, List<ColorTimes> colortimes, bool scaled, AnimationCurve curve)
+    public Tween LerpColor(Action<Color> sr, List<ColorTimes> colortimes, bool scaled, AnimationCurve curve)
     {
         Gradient gradient = new Gradient();
         GradientColorKey[] colorKeys = new GradientColorKey[colortimes.Count];
@@ -555,34 +555,34 @@ using System.Collections.Generic;
         return this;
     }
 
-    public mTimeline LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to)
+    public Tween LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to)
     {
         lerpVector2.Add(new Vector2Lerp(a, from, to));
         return this;
     }
-    public mTimeline LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to, AnimationCurve curve)
+    public Tween LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to, AnimationCurve curve)
     {
         lerpVector2.Add(new Vector2Lerp(a, from, to, curve));
         return this;
     }
 
-    public mTimeline LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to)
+    public Tween LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to)
     {
         lerpVector3.Add(new Vector3Lerp(a, from, to));
         return this;
     }
-    public mTimeline LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to, AnimationCurve curve)
+    public Tween LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to, AnimationCurve curve)
     {
         lerpVector3.Add(new Vector3Lerp(a, from, to, curve));
         return this;
     }
 
-    public mTimeline LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
+    public Tween LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
     {
         lerpRot.Add(new RotationLerp(t, from, to));
         return this;
     }
-    public mTimeline LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to, AnimationCurve curve)
+    public Tween LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to, AnimationCurve curve)
     {
         lerpRot.Add(new RotationLerp(t, from, to, curve));
         return this;
