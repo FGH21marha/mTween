@@ -51,7 +51,7 @@ public class mTween : MonoBehaviour
     /// </summary>
     public static mTimeline NewTimeline(float time)
     {
-        mTimeline i = new mTimeline(time);
+        mTimeline i = new mTimeline(time).SetID();
         myCall.Add(i);
 
         if(instance == null)
