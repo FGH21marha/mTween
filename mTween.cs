@@ -105,8 +105,7 @@ public class mTween : MonoBehaviour
     /// </summary>
     public static Tween DelayedCall(float time, Action OnComplete)
     {
-        Tween i = new Tween(time);
-        i.SetOnComplete(OnComplete);
+        Tween i = new Tween(time).SetOnComplete(OnComplete);
         myCall.Add(i);
 
         if (instance == null)
@@ -282,7 +281,7 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Adds more time to an tween. NOTE: UNSAFE
+    /// Adds more time to an tween. OBS: UNSAFE
     /// </summary>
     public static void DelayTweenUnsafe(string id, float delay)
     {

@@ -562,7 +562,21 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Interpolate from Vector2 to Vector2
+    /// Interpolate float
+    /// </summary>
+    public Tween LerpFloat(Action<float> a, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp(a, from, to));
+        return this;
+    }
+    public Tween LerpFloat(Action<float> a, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp(a, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Interpolate Vector2
     /// </summary>
     public Tween LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to)
     {
@@ -576,7 +590,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Interpolate from Vector3 to Vector3
+    /// Interpolate Vector3
     /// </summary>
     public Tween LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to)
     {
@@ -590,7 +604,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Interpolate from Quaternion to Quaternion
+    /// Interpolate Quaternion
     /// </summary>
     public Tween LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
     {
