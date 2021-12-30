@@ -7,13 +7,17 @@ public partial class mTimeline
     /// </summary>
     public mTimeline RotateTowardsTarget(Transform follower, Transform Target)
     {
-        Quaternion lookDir = Quaternion.FromToRotation(follower.forward, Target.position - follower.position);
+        Vector3 dir = (Target.position - follower.position).normalized;
+        Quaternion lookDir = Quaternion.LookRotation(dir);
+
         lerpRot.Add(new RotationLerp((i) => follower.rotation = i, follower.rotation, lookDir));
         return this;
     }
     public mTimeline RotateTowardsTarget(Transform follower, Transform Target, AnimationCurve curve)
     {
-        Quaternion lookDir = Quaternion.FromToRotation(follower.forward, Target.position - follower.position);
+        Vector3 dir = (Target.position - follower.position).normalized;
+        Quaternion lookDir = Quaternion.LookRotation(dir);
+
         lerpRot.Add(new RotationLerp((i) => follower.rotation = i, follower.rotation, lookDir, curve));
         return this;
     }
