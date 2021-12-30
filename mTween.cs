@@ -159,10 +159,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
-            {
                 myCall[i].Cancel();
-                myCall[i].Cancel();
-            }
     }
 
     /// <summary>
@@ -172,10 +169,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
-            {
                 myCall[i].Cancel();
-                myCall[i].Cancel();
-            }
     }
 
     /// <summary>
@@ -185,10 +179,7 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
-            {
-                myCall[i].Cancel();
                 myCall.Add(new Tween(t).SetOnComplete(() => myCall[i].Cancel()));
-            }
     }
 
     /// <summary>
