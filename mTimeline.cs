@@ -657,7 +657,6 @@ using System.Collections.Generic;
         }
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
-    
 
     protected struct ContinuousTargetLerp
     {
