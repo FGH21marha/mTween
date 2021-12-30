@@ -759,6 +759,8 @@ using System.Collections.Generic;
     {
         if (canceled) return;
 
+        unscaledProgress += Time.deltaTime;
+
         progress = curve.Evaluate(Remap(unscaledProgress, 0f, duration, min, max));
         progress = Mathf.Clamp(progress, min, max);
         onUpdate?.Invoke();
@@ -901,7 +903,6 @@ using System.Collections.Generic;
         paused = false;
         onContinue?.Invoke();
     }
-    public void UpdateTime() => unscaledProgress += Time.deltaTime;
     public void UpdatePauseTime() => unscaledPauseTime += Time.deltaTime;
     public void UpdateIntervalTime() => unscaledIntervalTime += Time.deltaTime;
     public void AddDelay(float additionalDelay)

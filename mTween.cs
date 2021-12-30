@@ -330,6 +330,7 @@ public class mTween : MonoBehaviour
 
         for (int i = 0; i < myCall.Count; i++)
         {
+            //Check if event was canceled, remove current timeline if true
             if (myCall[i].canceled)
             {
                 myCall.Remove(myCall[i]);
@@ -337,6 +338,7 @@ public class mTween : MonoBehaviour
                 continue;
             }
 
+            //Check if event was paused, resume after unscaledPauseTime if one was provided
             if (myCall[i].paused)
             {
                 myCall[i].UpdatePauseTime();
@@ -349,6 +351,7 @@ public class mTween : MonoBehaviour
                 continue;
             }
 
+            //Check if event has an interval, delay the call between Complete and Start if true
             if (myCall[i].onInterval)
             {
                 myCall[i].UpdateIntervalTime();
@@ -362,19 +365,23 @@ public class mTween : MonoBehaviour
                 continue;
             }
 
+            //Check if unscaledProgress is 0, call Start if true
             if (myCall[i].unscaledProgress == 0f)
                 myCall[i].Start();
 
+            //Check if unscaledProgress is same as durationWithDelay, try call Complete if true
             if (myCall[i].unscaledProgress >= (myCall[i].durationWithDelay - Mathf.Epsilon))
             {
                 myCall[i].unscaledProgress = myCall[i].durationWithDelay;
 
+                //Check if timeline is set to repeat
                 if (myCall[i].repeat)
                 {
-                    myCall[i].ResetCustomActionsList();
                     myCall[i].durationWithDelay = myCall[i].duration;
+                    myCall[i].ResetCustomActionsList();
                     myCall[i].CompletedRun();
 
+                    //Check if activeRepeatCount is same as repeatCount. Call Complete if true, else increment activeRepeatCount
                     if (myCall[i].activeRepeatCount == myCall[i].repeatCount && myCall[i].repeatCount != 0)
                     {
                         myCall[i].repeat = false;
@@ -384,28 +391,23 @@ public class mTween : MonoBehaviour
                         continue;
                     }
                     else if (myCall[i].activeRepeatCount < myCall[i].repeatCount && myCall[i].repeatCount != 0)
-                    {
                         myCall[i].activeRepeatCount++;
-                    }
 
                     if (myCall[i].interval)
-                    {
                         myCall[i].onInterval = true;
-                    }
                     else
-                    {
                         myCall[i].unscaledProgress = 0f;
-                    }
                         
                     continue;
                 }
 
+                //Call Complete and remove self from active mTimelines
                 myCall[i].Complete();
                 myCall.Remove(myCall[i]);
                 continue;
             }
 
-            myCall[i].UpdateTime();
+            //Update time of active mTimeline
             myCall[i].Update();
         }
     }
