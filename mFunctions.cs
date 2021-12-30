@@ -415,6 +415,133 @@ public partial class mTimeline
 
     #region RectTransform operations
     /// <summary>
+    /// Rotate RectTransform around a center with a given radius
+    /// </summary>
+    public mTimeline MoveAlongCircle(RectTransform t, float r)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, float r, bool inverted)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, Vector3 center, float r)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, Vector3 center, float r, bool inverted)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, float r, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, float r, bool inverted, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, Vector3 center, float r, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(RectTransform t, Vector3 center, float r, bool inverted, AnimationCurve curve)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+
+    /// <summary>
+    /// Rotate RectTransform around a center with a given radius in local space
+    /// </summary>
+    public mTimeline MoveAlongCircleLocal(RectTransform t, float r)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, float r, bool inverted)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, Vector3 center, float r)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, Vector3 center, float r, bool inverted)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, float r, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, float r, bool inverted, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, Vector3 center, float r, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(RectTransform t, Vector3 center, float r, bool inverted, AnimationCurve curve)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+    /// <summary>
     /// Moves RectTransform towards position
     /// </summary>
     public mTimeline MoveTo(RectTransform t, Vector3 to)
