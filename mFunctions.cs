@@ -31,4 +31,51 @@ public partial class mTimeline
         lerpTarget.Add(new ContinuousTargetLerp(t, target, worldUp));
         return this;
     }
+
+    /// <summary>
+    /// Moves transform towards position
+    /// </summary>
+    public mTimeline MoveTo(Transform t, Vector3 to)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.position = i, t.position, to));
+        return this;
+    }
+    public mTimeline MoveTo(Transform t, Vector3 from, Vector3 to)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.position = i, from, to));
+        return this;
+    }
+    public mTimeline MoveTo(Transform t, Vector3 to, AnimationCurve curve)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.position = i, t.position, to, curve));
+        return this;
+    }
+    public mTimeline MoveTo(Transform t, Vector3 from, Vector3 to, AnimationCurve curve)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.position = i, from, to, curve));
+        return this;
+    }
+    /// <summary>
+    /// Moves transform towards position in local space
+    /// </summary>
+    public mTimeline MoveToLocal(Transform t, Vector3 to)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.localPosition = i, t.localPosition, to));
+        return this;
+    }
+    public mTimeline MoveToLocal(Transform t, Vector3 from, Vector3 to)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.localPosition = i, from, to));
+        return this;
+    }
+    public mTimeline MoveToLocal(Transform t, Vector3 to, AnimationCurve curve)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.localPosition = i, t.localPosition, to, curve));
+        return this;
+    }
+    public mTimeline MoveToLocal(Transform t, Vector3 from, Vector3 to, AnimationCurve curve)
+    {
+        lerpVector3.Add(new Vector3Lerp((i) => t.localPosition = i, from, to, curve));
+        return this;
+    }
 }
