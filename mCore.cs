@@ -149,7 +149,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action at the start of an tween
+    /// Triggers an action at the start of a tween
     /// </summary>
     public Tween SetOnStart(Action onStart)
     {
@@ -158,7 +158,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action for every update of the tween. Returns progress from 0 to 1 for the duration of the tween
+    /// Triggers an action for every update of the tween. Returns progress from 0 to 1
     /// </summary>
     public Tween SetOnUpdate01(Action<float> onUpdate)
     {
