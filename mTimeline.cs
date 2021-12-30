@@ -37,6 +37,7 @@ using System.Collections.Generic;
     public bool repeat;
     public bool completeTriggeredOnCancel;
     public bool completeLoopTriggeredOnCancel;
+    public bool restoreOnCancel = true;
 
     public float min = 0f;
     public float max = 1f;
@@ -107,17 +108,7 @@ using System.Collections.Generic;
     {
         this.canceled = true;
 
-        foreach (floatLerp i in lerpFloat)
-            i.Reset();
-
-        foreach (Vector2Lerp i in lerpVector2)
-            i.Reset();
-
-        foreach (Vector3Lerp i in lerpVector3)
-            i.Reset();
-
-        foreach (ColorLerp i in lerpColor)
-            i.Reset();
+        ResetLerps();
 
         return this;
     }
@@ -247,6 +238,15 @@ using System.Collections.Generic;
     }
 
     /// <summary>
+    /// Does not restore the state of the tweened object when the event is canceled
+    /// </summary>
+    public mTimeline DontRestoreOnCancel()
+    {
+        restoreOnCancel = false;
+        return this;
+    }
+
+    /// <summary>
     /// Sets a unique ID for this event
     /// </summary>
     public mTimeline SetID()
@@ -312,6 +312,24 @@ using System.Collections.Generic;
         completedCustomActions.Clear();
 
         return this;
+    }
+
+    private void ResetLerps()
+    {
+        if (!restoreOnCancel)
+            return;
+
+        foreach (floatLerp i in lerpFloat)
+            i.Reset();
+
+        foreach (Vector2Lerp i in lerpVector2)
+            i.Reset();
+
+        foreach (Vector3Lerp i in lerpVector3)
+            i.Reset();
+
+        foreach (ColorLerp i in lerpColor)
+            i.Reset();
     }
 
     public mTimeline LerpColor(Action<Color> sr, Color startColor, Color endColor)
@@ -787,8 +805,16 @@ using System.Collections.Generic;
         canceled = false;
         onStart?.Invoke(); 
     }
-    public void Complete() => onComplete?.Invoke();
-    public void CompletedRun() => onCompletedRun?.Invoke();
+    public void Complete()
+    {
+        ResetLerps();
+        onComplete?.Invoke();
+    }
+    public void CompletedRun()
+    {
+        ResetLerps();
+        onCompletedRun?.Invoke();
+    }
     public void Update()
     {
         if (canceled) return;
