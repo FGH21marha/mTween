@@ -106,6 +106,19 @@ using System.Collections.Generic;
     public mTimeline Cancel()
     {
         this.canceled = true;
+
+        foreach (floatLerp i in lerpFloat)
+            i.Reset();
+
+        foreach (Vector2Lerp i in lerpVector2)
+            i.Reset();
+
+        foreach (Vector3Lerp i in lerpVector3)
+            i.Reset();
+
+        foreach (ColorLerp i in lerpColor)
+            i.Reset();
+
         return this;
     }
 
@@ -580,6 +593,8 @@ using System.Collections.Generic;
             this.end = end;
             this.curve = curve;
         }
+
+        public void Reset() => a?.Invoke(start);
     }
     protected List<floatLerp> lerpFloat = new List<floatLerp>();
 
@@ -606,6 +621,8 @@ using System.Collections.Generic;
             this.end = end;
             this.curve = curve;
         }
+
+        public void Reset() => a?.Invoke(start);
     }
     protected List<Vector2Lerp> lerpVector2 = new List<Vector2Lerp>();
 
@@ -632,6 +649,8 @@ using System.Collections.Generic;
             this.end = end;
             this.curve = curve;
         }
+
+        public void Reset() => a?.Invoke(start);
     }
     protected List<Vector3Lerp> lerpVector3 = new List<Vector3Lerp>();
 
@@ -658,6 +677,8 @@ using System.Collections.Generic;
             curve.AddKey(0f, 0f);
             curve.AddKey(1f, 1f);
         }
+
+        public void Reset() => a?.Invoke(from);
     }
     protected List<RotationLerp> lerpRot = new List<RotationLerp>();
 
@@ -681,6 +702,8 @@ using System.Collections.Generic;
             this.gradient = gradient;
             this.curve = curve;
         }
+
+        public void Reset() => color?.Invoke(gradient.colorKeys[0].color);
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
     protected void CreateColorList(Color from, Color to, out Gradient gradient, out GradientColorKey[] colorKeys, out GradientAlphaKey[] alphaKeys)
