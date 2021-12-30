@@ -681,41 +681,40 @@ using System.Collections.Generic;
             this.gradient = gradient;
             this.curve = curve;
         }
-        public ColorLerp(Action<Color> sr, Color from, Color to)
-        {
-            this.color = sr;
-
-            List<Color> colors = new List<Color>();
-            colors.Add(from);
-            colors.Add(to);
-
-            Gradient gradient = new Gradient();
-            GradientColorKey[] colorKeys = new GradientColorKey[colors.Count];
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colors.Count];
-
-            this.gradient = gradient;
-            this.curve = new AnimationCurve();
-            curve.AddKey(0f, 0f);
-            curve.AddKey(1f, 1f);
-        }
-        public ColorLerp(Action<Color> sr, Color from, Color to, AnimationCurve curve)
-        {
-            this.color = sr;
-
-            List<Color> colors = new List<Color>();
-            colors.Add(from);
-            colors.Add(to);
-
-            Gradient gradient = new Gradient();
-            GradientColorKey[] colorKeys = new GradientColorKey[colors.Count];
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colors.Count];
-
-            this.gradient = gradient;
-            this.curve = new AnimationCurve();
-            this.curve = curve;
-        }
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
+    protected void CreateColorList(Color from, Color to, out Gradient gradient, out GradientColorKey[] colorKeys, out GradientAlphaKey[] alphaKeys)
+    {
+        List<Color> colors = new List<Color>();
+        colors.Add(from);
+        colors.Add(to);
+
+        gradient = new Gradient();
+        colorKeys = new GradientColorKey[colors.Count];
+        alphaKeys = new GradientAlphaKey[colors.Count];
+        for (int i = 0; i < colorKeys.Length; i++)
+        {
+            colorKeys[i].color = colors[i];
+            colorKeys[i].time = i / (colorKeys.Length - 1);
+        }
+
+        for (int i = 0; i < alphaKeys.Length; i++)
+        {
+            alphaKeys[i].alpha = colors[i].a;
+            alphaKeys[i].time = i / (alphaKeys.Length - 1);
+        }
+    }
+    protected Gradient GetGradient(Color from, Color to)
+    {
+        Gradient gradient;
+        GradientColorKey[] colorKeys;
+        GradientAlphaKey[] alphaKeys;
+
+        CreateColorList(from, to, out gradient, out colorKeys, out alphaKeys);
+
+        gradient.SetKeys(colorKeys, alphaKeys);
+        return gradient;
+    }
 
     protected struct ContinuousTargetLerp
     {

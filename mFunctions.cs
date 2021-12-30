@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
@@ -449,22 +450,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(Image t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(Image t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(Image t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from), 
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(Image t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
 
@@ -473,22 +480,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(RawImage t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(RawImage t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(RawImage t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(RawImage t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
 
@@ -497,22 +510,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(Text t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(Text t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(Text t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(Text t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
 
@@ -521,22 +540,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(SpriteRenderer t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(SpriteRenderer t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(SpriteRenderer t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(SpriteRenderer t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     #endregion
@@ -547,22 +572,22 @@ public partial class mTimeline
     /// </summary>
     public mTimeline ColorTo(TextMesh t, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
         return this;
     }
     public mTimeline ColorTo(TextMesh t, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
         return this;
     }
     public mTimeline ColorTo(TextMesh t, Color from, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
         return this;
     }
     public mTimeline ColorTo(TextMesh t, Color from, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
 
@@ -571,22 +596,22 @@ public partial class mTimeline
     /// </summary>
     public mTimeline ColorTo(TextMeshPro t, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
         return this;
     }
     public mTimeline ColorTo(TextMeshPro t, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
         return this;
     }
     public mTimeline ColorTo(TextMeshPro t, Color from, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
         return this;
     }
     public mTimeline ColorTo(TextMeshPro t, Color from, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
 
@@ -595,22 +620,22 @@ public partial class mTimeline
     /// </summary>
     public mTimeline ColorTo(TextMeshProUGUI t, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
         return this;
     }
     public mTimeline ColorTo(TextMeshProUGUI t, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
         return this;
     }
     public mTimeline ColorTo(TextMeshProUGUI t, Color from, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
         return this;
     }
     public mTimeline ColorTo(TextMeshProUGUI t, Color from, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
 
@@ -619,22 +644,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(TextMesh t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(TextMesh t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(TextMesh t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(TextMesh t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
 
@@ -643,22 +674,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(TextMeshPro t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(TextMeshPro t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(TextMeshPro t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(TextMeshPro t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
 
@@ -667,22 +704,28 @@ public partial class mTimeline
     /// </summary>
     public mTimeline AlphaTo(TextMeshProUGUI t, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(TextMeshProUGUI t, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color,
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     public mTimeline AlphaTo(TextMeshProUGUI t, float from, float to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to))));
         return this;
     }
     public mTimeline AlphaTo(TextMeshProUGUI t, float from, float to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(
+                new Color(t.color.r, t.color.g, t.color.b, from),
+                new Color(t.color.r, t.color.g, t.color.b, to)), curve));
         return this;
     }
     #endregion
@@ -741,22 +784,22 @@ public partial class mTimeline
     /// </summary>
     public mTimeline ColorTo(Light t, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
         return this;
     }
     public mTimeline ColorTo(Light t, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
         return this;
     }
     public mTimeline ColorTo(Light t, Color from, Color to)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
         return this;
     }
     public mTimeline ColorTo(Light t, Color from, Color to, AnimationCurve curve)
     {
-        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
     #endregion
