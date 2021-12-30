@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 
-[Serializable] public class mTimeline
+[Serializable] public partial class mTimeline
 {
     string ID;
     public string GetID() => ID;
