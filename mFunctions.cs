@@ -25,6 +25,114 @@ public partial class mTimeline
 
         return this;
     }
+    public mTimeline MoveAlongCircle(Transform t, Vector3 center, float r)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(Transform t, Vector3 center, float r, bool inverted)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircle(Transform t, float r, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(Transform t, float r, bool inverted, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircle(Transform t, Vector3 center, float r, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(Transform t, Vector3 center, float r, bool inverted, AnimationCurve curve)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+
+    /// <summary>
+    /// Rotate Transform around a center with a given radius in local space
+    /// </summary>
+    public mTimeline MoveAlongCircleLocal(Transform t, float r)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, float r, bool inverted)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, Vector3 center, float r)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, Vector3 center, float r, bool inverted)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, float r, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, float r, bool inverted, AnimationCurve curve)
+    {
+        Vector3 center = new Vector3(t.localPosition.x, t.localPosition.y - r, t.localPosition.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, Vector3 center, float r, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        return this;
+    }
+    public mTimeline MoveAlongCircleLocal(Transform t, Vector3 center, float r, bool inverted, AnimationCurve curve)
+    {
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2, curve));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.localPosition = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f, curve));
+
+        return this;
+    }
 
     /// <summary>
     /// Rotates Transform to face a target
@@ -237,6 +345,30 @@ public partial class mTimeline
     }
 
     /// <summary>
+    /// Rotates Transform around axis towards angle
+    /// </summary>
+    public mTimeline AngleTo(Transform t, float to, Vector3 orientation)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, t.eulerAngles.magnitude, to));
+        return this;
+    }
+    public mTimeline AngleTo(Transform t, float to, Vector3 orientation, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, t.eulerAngles.magnitude, to, curve));
+        return this;
+    }
+    public mTimeline AngleTo(Transform t, float from, float to, Vector3 orientation)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, from, to));
+        return this;
+    }
+    public mTimeline AngleTo(Transform t, float from, float to, Vector3 orientation, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
     /// Rotates Transform towards rotation in local space
     /// </summary>
     public mTimeline RotateToLocal(Transform t, Quaternion to)
@@ -391,6 +523,30 @@ public partial class mTimeline
     public mTimeline RotateTo(RectTransform t, Vector3 from, Vector3 to, AnimationCurve curve)
     {
         lerpRot.Add(new RotationLerp((i) => t.rotation = i, Quaternion.Euler(from), Quaternion.Euler(to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Rotates RectTransform around axis towards angle
+    /// </summary>
+    public mTimeline AngleTo(RectTransform t, float to, Vector3 orientation)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, t.eulerAngles.magnitude, to));
+        return this;
+    }
+    public mTimeline AngleTo(RectTransform t, float to, Vector3 orientation, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, t.eulerAngles.magnitude, to, curve));
+        return this;
+    }
+    public mTimeline AngleTo(RectTransform t, float from, float to, Vector3 orientation)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, from, to));
+        return this;
+    }
+    public mTimeline AngleTo(RectTransform t, float from, float to, Vector3 orientation, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.eulerAngles = orientation * i, from, to, curve));
         return this;
     }
 
@@ -586,7 +742,31 @@ public partial class mTimeline
     #endregion
 
     #region Color operations
-    
+
+    /// <summary>
+    /// Lerps Text Color towards value
+    /// </summary>
+    public mTimeline ColorTo(Text t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to)));
+        return this;
+    }
+    public mTimeline ColorTo(Text t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(t.color, to), curve));
+        return this;
+    }
+    public mTimeline ColorTo(Text t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to)));
+        return this;
+    }
+    public mTimeline ColorTo(Text t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+
     /// <summary>
     /// Lerps Image Color towards value
     /// </summary>
@@ -666,22 +846,22 @@ public partial class mTimeline
     /// <summary>
     /// Lerps Material Color towards value
     /// </summary>
-    public mTimeline MaterialValueTo(Material t, string value, Color to)
+    public mTimeline ColorTo(Material t, string value, Color to)
     {
         lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(t.color, to)));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Color to, AnimationCurve curve)
+    public mTimeline ColorTo(Material t, string value, Color to, AnimationCurve curve)
     {
         lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(t.color, to), curve));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Color from, Color to)
+    public mTimeline ColorTo(Material t, string value, Color from, Color to)
     {
         lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(from, to)));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Color from, Color to, AnimationCurve curve)
+    public mTimeline ColorTo(Material t, string value, Color from, Color to, AnimationCurve curve)
     {
         lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(from, to), curve));
         return this;
@@ -690,22 +870,22 @@ public partial class mTimeline
     /// <summary>
     /// Lerps Material Float towards value
     /// </summary>
-    public mTimeline MaterialValueTo(Material t, string value, float to)
+    public mTimeline ValueTo(Material t, string value, float to)
     {
         lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), t.GetFloat(value), to));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, float to, AnimationCurve curve)
+    public mTimeline ValueTo(Material t, string value, float to, AnimationCurve curve)
     {
         lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), t.GetFloat(value), to, curve));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, float from, float to)
+    public mTimeline ValueTo(Material t, string value, float from, float to)
     {
         lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), from, to));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, float from, float to, AnimationCurve curve)
+    public mTimeline ValueTo(Material t, string value, float from, float to, AnimationCurve curve)
     {
         lerpFloat.Add(new floatLerp((i) => t.SetFloat(value, i), from, to, curve));
         return this;
@@ -714,42 +894,42 @@ public partial class mTimeline
     /// <summary>
     /// Lerps Material Vector towards value
     /// </summary>
-    public mTimeline MaterialValueTo(Material t, string value, Vector2 to)
+    public mTimeline ValueTo(Material t, string value, Vector2 to)
     {
         lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), t.GetVector(value), to));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector2 to, AnimationCurve curve)
+    public mTimeline ValueTo(Material t, string value, Vector2 to, AnimationCurve curve)
     {
         lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), t.GetVector(value), to, curve));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector2 from, Vector2 to)
+    public mTimeline ValueTo(Material t, string value, Vector2 from, Vector2 to)
     {
         lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), from, to));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector2 from, Vector2 to, AnimationCurve curve)
+    public mTimeline ValueTo(Material t, string value, Vector2 from, Vector2 to, AnimationCurve curve)
     {
         lerpVector2.Add(new Vector2Lerp((i) => t.SetVector(value, i), from, to, curve));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector3 to)
+    public mTimeline ValueTo(Material t, string value, Vector3 to)
     {
         lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), t.GetVector(value), to));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector3 to, AnimationCurve curve)
+    public mTimeline ValueTo(Material t, string value, Vector3 to, AnimationCurve curve)
     {
         lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), t.GetVector(value), to, curve));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector3 from, Vector3 to)
+    public mTimeline ValueTo(Material t, string value, Vector3 from, Vector3 to)
     {
         lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), from, to));
         return this;
     }
-    public mTimeline MaterialValueTo(Material t, string value, Vector3 from, Vector3 to, AnimationCurve curve)
+    public mTimeline ValueTo(Material t, string value, Vector3 from, Vector3 to, AnimationCurve curve)
     {
         lerpVector3.Add(new Vector3Lerp((i) => t.SetVector(value, i), from, to, curve));
         return this;
@@ -949,22 +1129,22 @@ public partial class mTimeline
     /// <summary>
     /// Lerps Light range towards value
     /// </summary>
-    public mTimeline RangeTo(Light t, float to)
+    public mTimeline LightRangeTo(Light t, float to)
     {
         lerpFloat.Add(new floatLerp((i) => t.range = i, t.range, to));
         return this;
     }
-    public mTimeline RangeTo(Light t, float to, AnimationCurve curve)
+    public mTimeline LightRangeTo(Light t, float to, AnimationCurve curve)
     {
         lerpFloat.Add(new floatLerp((i) => t.range = i, t.range, to, curve));
         return this;
     }
-    public mTimeline RangeTo(Light t, float from, float to)
+    public mTimeline LightRangeTo(Light t, float from, float to)
     {
         lerpFloat.Add(new floatLerp((i) => t.range = i, from, to));
         return this;
     }
-    public mTimeline RangeTo(Light t, float from, float to, AnimationCurve curve)
+    public mTimeline LightRangeTo(Light t, float from, float to, AnimationCurve curve)
     {
         lerpFloat.Add(new floatLerp((i) => t.range = i, from, to, curve));
         return this;
@@ -1021,34 +1201,6 @@ public partial class mTimeline
     }
 
     /// <summary>
-    /// Lerps AudioMixerGroup value towards value
-    /// </summary>
-    public mTimeline VolumeTo(AudioMixerGroup t, string value, float to)
-    {
-        float o;
-        t.audioMixer.GetFloat("Volume", out o);
-        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), o, to));
-        return this;
-    }
-    public mTimeline VolumeTo(AudioMixerGroup t, string value, float to, AnimationCurve curve)
-    {
-        float o;
-        t.audioMixer.GetFloat("Volume", out o);
-        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), o, to, curve));
-        return this;
-    }
-    public mTimeline VolumeTo(AudioMixerGroup t, string value, float from, float to)
-    {
-        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), from, to));
-        return this;
-    }
-    public mTimeline VolumeTo(AudioMixerGroup t, string value, float from, float to, AnimationCurve curve)
-    {
-        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), from, to, curve));
-        return this;
-    }
-
-    /// <summary>
     /// Lerps Audio pitch towards value
     /// </summary>
     public mTimeline PitchTo(AudioSource t, float to)
@@ -1069,6 +1221,34 @@ public partial class mTimeline
     public mTimeline PitchTo(AudioSource t, float from, float to, AnimationCurve curve)
     {
         lerpFloat.Add(new floatLerp((i) => t.pitch = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps AudioMixerGroup value towards value
+    /// </summary>
+    public mTimeline ValueTo(AudioMixerGroup t, string value, float to)
+    {
+        float o;
+        t.audioMixer.GetFloat(value, out o);
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), o, to));
+        return this;
+    }
+    public mTimeline ValueTo(AudioMixerGroup t, string value, float to, AnimationCurve curve)
+    {
+        float o;
+        t.audioMixer.GetFloat(value, out o);
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), o, to, curve));
+        return this;
+    }
+    public mTimeline ValueTo(AudioMixerGroup t, string value, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), from, to));
+        return this;
+    }
+    public mTimeline ValueTo(AudioMixerGroup t, string value, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), from, to, curve));
         return this;
     }
     #endregion
