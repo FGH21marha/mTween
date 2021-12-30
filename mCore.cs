@@ -87,7 +87,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Repeats the action
+    /// Repeats the tween
     /// </summary>
     public Tween Repeat()
     {
@@ -102,7 +102,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Cancel event immediately
+    /// Cancel tween immediately
     /// </summary>
     public Tween Cancel()
     {
@@ -114,7 +114,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Executes the event n times
+    /// Executes the tween n times
     /// </summary>
     public Tween ExecuteNTimes(int n)
     {
@@ -124,7 +124,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Delay between action repetition
+    /// Delay between tween repetition
     /// </summary>
     public Tween SetInterval(float duration)
     {
@@ -137,7 +137,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Plays the event in reverse
+    /// Plays the tween in reverse
     /// </summary>
     public Tween PlayReversed()
     {
@@ -149,7 +149,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action at the start of an event
+    /// Triggers an action at the start of a tween
     /// </summary>
     public Tween SetOnStart(Action onStart)
     {
@@ -158,7 +158,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action for every update of the event. Returns progress from 0 to 1 for the duration of the event
+    /// Triggers an action for every update of the tween. Returns progress from 0 to 1
     /// </summary>
     public Tween SetOnUpdate01(Action<float> onUpdate)
     {
@@ -167,7 +167,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action for every update of the event
+    /// Triggers an action for every update of the tween
     /// </summary>
     public Tween SetOnUpdate(Action onUpdate)
     {
@@ -181,7 +181,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action on full event completion
+    /// Triggers an action on tween completion
     /// </summary>
     public Tween SetOnComplete(Action onComplete)
     {
@@ -196,7 +196,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action if the event is canceled
+    /// Triggers an action if the tween is canceled
     /// </summary>
     public Tween SetOnCancel(Action onCancel)
     {
@@ -205,7 +205,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action if the event is paused
+    /// Triggers an action if the tween is paused
     /// </summary>
     public Tween SetOnPause(Action onPause)
     {
@@ -214,7 +214,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action if the event is continued
+    /// Triggers an action if the tween is continued
     /// </summary>
     public Tween SetOnContinue(Action onContinue)
     {
@@ -223,7 +223,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action on partial event completion, e.g. when it has done a full cycle and is going to repeat
+    /// Triggers an action on partial tween completion, e.g. when it has done a full cycle and is going to repeat
     /// </summary>
     public Tween SetOnRepeat(Action onFinished)
     {
@@ -238,7 +238,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Does not restore the state of the tweened object when the event is canceled
+    /// Does not restore the state of the tweened object when the tween is canceled
     /// </summary>
     public Tween DontRestoreOnCancel()
     {
@@ -247,7 +247,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Sets a unique ID for this event
+    /// Sets a unique ID for this tween
     /// </summary>
     public Tween SetID()
     {
@@ -279,7 +279,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Calls action after t seconds during the event
+    /// Calls action after t seconds during the tween
     /// </summary>
     public Tween CallOnTime(float t, Action a)
     {
@@ -289,7 +289,7 @@ using System.Collections.Generic;
         return this;
     }
     /// <summary>
-    /// Calls action after t seconds during the event, scaling determines if the time used is scaled (0 to 1) or unscaled time (0 to event length)
+    /// Calls action after t seconds during the tween, scaling determines if the time used is scaled (0 to 1) or unscaled time (0 to event length)
     /// </summary>
     public Tween CallOnTime(float t, Action a, bool scaling)
     {
