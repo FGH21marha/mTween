@@ -87,7 +87,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Repeats the action
+    /// Repeats the tween
     /// </summary>
     public Tween Repeat()
     {
@@ -102,7 +102,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Cancel event immediately
+    /// Cancel tween immediately
     /// </summary>
     public Tween Cancel()
     {
@@ -114,7 +114,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Executes the event n times
+    /// Executes the tween n times
     /// </summary>
     public Tween ExecuteNTimes(int n)
     {
@@ -124,7 +124,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Delay between action repetition
+    /// Delay between tween repetition
     /// </summary>
     public Tween SetInterval(float duration)
     {
@@ -137,7 +137,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Plays the event in reverse
+    /// Plays the tween in reverse
     /// </summary>
     public Tween PlayReversed()
     {
@@ -149,7 +149,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action at the start of an event
+    /// Triggers an action at the start of an tween
     /// </summary>
     public Tween SetOnStart(Action onStart)
     {
@@ -158,7 +158,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action for every update of the event. Returns progress from 0 to 1 for the duration of the event
+    /// Triggers an action for every update of the tween. Returns progress from 0 to 1 for the duration of the tween
     /// </summary>
     public Tween SetOnUpdate01(Action<float> onUpdate)
     {
@@ -167,7 +167,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action for every update of the event
+    /// Triggers an action for every update of the tween
     /// </summary>
     public Tween SetOnUpdate(Action onUpdate)
     {
@@ -181,7 +181,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action on full event completion
+    /// Triggers an action on full tween completion
     /// </summary>
     public Tween SetOnComplete(Action onComplete)
     {
@@ -196,7 +196,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action if the event is canceled
+    /// Triggers an action if the tween is canceled
     /// </summary>
     public Tween SetOnCancel(Action onCancel)
     {
@@ -205,7 +205,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action if the event is paused
+    /// Triggers an action if the tween is paused
     /// </summary>
     public Tween SetOnPause(Action onPause)
     {
@@ -214,7 +214,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action if the event is continued
+    /// Triggers an action if the tween is continued
     /// </summary>
     public Tween SetOnContinue(Action onContinue)
     {
@@ -223,7 +223,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Triggers an action on partial event completion, e.g. when it has done a full cycle and is going to repeat
+    /// Triggers an action on partial tween completion, e.g. when it has done a full cycle and is going to repeat
     /// </summary>
     public Tween SetOnRepeat(Action onFinished)
     {
@@ -238,7 +238,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Does not restore the state of the tweened object when the event is canceled
+    /// Does not restore the state of the tweened object when the tween is canceled
     /// </summary>
     public Tween DontRestoreOnCancel()
     {
@@ -247,7 +247,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Sets a unique ID for this event
+    /// Sets a unique ID for this tween
     /// </summary>
     public Tween SetID()
     {
@@ -279,7 +279,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Calls action after t seconds during the event
+    /// Calls action after t seconds during the tween
     /// </summary>
     public Tween CallOnTime(float t, Action a)
     {
@@ -289,7 +289,7 @@ using System.Collections.Generic;
         return this;
     }
     /// <summary>
-    /// Calls action after t seconds during the event, scaling determines if the time used is scaled (0 to 1) or unscaled time (0 to event length)
+    /// Calls action after t seconds during the tween, scaling determines if the time used is scaled (0 to 1) or unscaled time (0 to tween duration)
     /// </summary>
     public Tween CallOnTime(float t, Action a, bool scaling)
     {
@@ -314,6 +314,9 @@ using System.Collections.Generic;
         return this;
     }
 
+    /// <summary>
+    /// Reset all tweens lerps to the tween lerp start values
+    /// </summary>
     private void ResetLerps()
     {
         if (!restoreOnCancel)
@@ -332,6 +335,9 @@ using System.Collections.Generic;
             i.Reset();
     }
 
+    /// <summary>
+    /// Interpolate from color to color using two ore more colors or a gradient
+    /// </summary>
     public Tween LerpColor(Action<Color> sr, Color startColor, Color endColor)
     {
         List<Color> colors = new List<Color>();
@@ -555,6 +561,9 @@ using System.Collections.Generic;
         return this;
     }
 
+    /// <summary>
+    /// Interpolate from Vector2 to Vector2
+    /// </summary>
     public Tween LerpVector2(Action<Vector2> a, Vector2 from, Vector2 to)
     {
         lerpVector2.Add(new Vector2Lerp(a, from, to));
@@ -566,6 +575,9 @@ using System.Collections.Generic;
         return this;
     }
 
+    /// <summary>
+    /// Interpolate from Vector3 to Vector3
+    /// </summary>
     public Tween LerpVector3(Action<Vector3> a, Vector3 from, Vector3 to)
     {
         lerpVector3.Add(new Vector3Lerp(a, from, to));
@@ -577,6 +589,9 @@ using System.Collections.Generic;
         return this;
     }
 
+    /// <summary>
+    /// Interpolate from Quaternion to Quaternion
+    /// </summary>
     public Tween LerpQuaternion(Action<Quaternion> t, Quaternion from, Quaternion to)
     {
         lerpRot.Add(new RotationLerp(t, from, to));
@@ -800,16 +815,27 @@ using System.Collections.Generic;
     protected List<CustomAction> customActions = new List<CustomAction>();
     protected List<CustomAction> completedCustomActions = new List<CustomAction>();
 
+    /// <summary>
+    /// Starts the tween
+    /// </summary>
     public void Start() 
     {
         canceled = false;
         onStart?.Invoke(); 
     }
+
+    /// <summary>
+    /// Called on full tween completion
+    /// </summary>
     public void Complete()
     {
         ResetLerps();
         onComplete?.Invoke();
     }
+
+    /// <summary>
+    /// Called on completed tween loop
+    /// </summary>
     public void CompletedRun()
     {
         onCompletedRun?.Invoke();
@@ -930,6 +956,10 @@ using System.Collections.Generic;
             }
         }
     }
+
+    /// <summary>
+    /// Called on tween cancellation
+    /// </summary>
     public void OnCancel()
     {
         if (canceled) return;
@@ -942,6 +972,10 @@ using System.Collections.Generic;
         if (completeLoopTriggeredOnCancel)
             onCompletedRun?.Invoke();
     }
+
+    /// <summary>
+    /// Pause tween
+    /// </summary>
     public void Pause(float duration)
     {
         if (canceled) return;
@@ -957,6 +991,10 @@ using System.Collections.Generic;
         paused = true;
         onPause?.Invoke();
     }
+
+    /// <summary>
+    /// Resumes tween
+    /// </summary>
     public void Resume()
     {
         if (canceled) return;
@@ -966,9 +1004,20 @@ using System.Collections.Generic;
     } 
     public void UpdatePauseTime() => unscaledPauseTime += Time.deltaTime;
     public void UpdateIntervalTime() => unscaledIntervalTime += Time.deltaTime;
-    public void AddDelay(float additionalDelay) => durationWithDelay += additionalDelay;
-    public void AddDelayUnsafe(float additionalDelay) => duration += additionalDelay;
 
+    /// <summary>
+    /// Add time to the tween duration
+    /// </summary>
+    public void AddDuration(float additionalDelay) => durationWithDelay += additionalDelay;
+
+    /// <summary>
+    /// Add time to the tween duration, disposes the old duration value
+    /// </summary>
+    public void AddDurationUnsafe(float additionalDelay) => duration += additionalDelay;
+
+    /// <summary>
+    /// Remap the start and end values of tween time
+    /// </summary>
     protected float Remap(float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);

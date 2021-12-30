@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class mTween : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class mTween : MonoBehaviour
     private IEnumerator LateLateUpdate()
     {
         yield return new WaitForEndOfFrame();
-        UpdateQueuedEvents();
+        UpdateQueuedTweens();
     }
 
     #endregion
@@ -47,9 +47,9 @@ public class mTween : MonoBehaviour
     private static List<Tween> myCall = new List<Tween>();
 
     /// <summary>
-    /// Queue new event to be called after a period of time, returns call onComplete and onUpdate
+    /// Queue new tween to be called after a period of time, returns call onComplete and onUpdate
     /// </summary>
-    public static Tween NewTimeline(float time)
+    public static Tween NewTween(float time)
     {
         Tween i = new Tween(time).SetID();
         myCall.Add(i);
@@ -65,9 +65,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Queue new event to be called after a period of time, returns call onComplete and onUpdate
+    /// Queue new tween to be called after a period of time, returns call onComplete and onUpdate
     /// </summary>
-    public static Tween NewTimeline(GameObject id, float time)
+    public static Tween NewTween(GameObject id, float time)
     {
         Tween i = new Tween(id, time);
         myCall.Add(i);
@@ -83,9 +83,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Queue new event to be called after a period of time, returns call onComplete and onUpdate
+    /// Queue new tween to be called after a period of time, returns call onComplete and onUpdate
     /// </summary>
-    public static Tween NewTimeline(string id, float time)
+    public static Tween NewTween(string id, float time)
     {
         Tween i = new Tween(id, time);
         myCall.Add(i);
@@ -101,7 +101,7 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Delayed call that triggers an event after x amount of time
+    /// Triggers an action after x amount of time
     /// </summary>
     public static Tween DelayedCall(float time, Action OnComplete)
     {
@@ -120,7 +120,7 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Delayed call that triggers an event after x amount of time
+    /// Triggers an action after x amount of time
     /// </summary>
     public static Tween DelayedCall(GameObject id, float time, Action OnComplete)
     {
@@ -142,9 +142,9 @@ public class mTween : MonoBehaviour
     #region Class Methods
 
     /// <summary>
-    /// Cancels all events on this gameObject
+    /// Cancels all tweens on this gameObject
     /// </summary>
-    public static void CancelAllEvents()
+    public static void CancelAllTweens()
     {
         if (myCall.Count == 0) return;
 
@@ -153,9 +153,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Cancel event by ID
+    /// Cancel tween by ID
     /// </summary>
-    public static void CancelEvent(string id)
+    public static void CancelTween(string id)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
@@ -166,9 +166,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Cancel event by ID
+    /// Cancel tween by ID
     /// </summary>
-    public static void CancelEvent(GameObject id)
+    public static void CancelTween(GameObject id)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
@@ -179,9 +179,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Cancel event by ID after t seconds
+    /// Cancel tween by ID after t seconds
     /// </summary>
-    public static void CancelEvent(GameObject id, float t)
+    public static void CancelTween(GameObject id, float t)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
@@ -192,9 +192,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Cancel event by ID after t seconds
+    /// Cancel tween by ID after t seconds
     /// </summary>
-    public static void CancelEvent(string id, float t)
+    public static void CancelTween(string id, float t)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
@@ -205,9 +205,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Pause event by ID if provided event is not paused
+    /// Pause tween by ID if provided tween is not paused
     /// </summary>
-    public static void PauseEvent(string id, float duration)
+    public static void PauseTween(string id, float duration)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id && !myCall[i].paused)
@@ -215,9 +215,9 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Pause event by ID if provided event is not paused
+    /// Pause tween by ID if provided tween is not paused, possibly for a duration
     /// </summary>
-    public static void PauseEvent(GameObject id, float duration)
+    public static void PauseTween(GameObject id, float duration)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString() && !myCall[i].paused)
@@ -225,19 +225,15 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Pause event by ID if provided event is not paused
+    /// Pause tween by ID if provided tween is not paused
     /// </summary>
-    public static void PauseEvent(string id)
+    public static void PauseTween(string id)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id && !myCall[i].paused)
                 myCall[i].Pause();
     }
-
-    /// <summary>
-    /// Pause event by ID if provided event is not paused
-    /// </summary>
-    public static void PauseEvent(GameObject id)
+    public static void PauseTween(GameObject id)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString() && !myCall[i].paused)
@@ -245,19 +241,15 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Continue event by ID if provided event is paused
+    /// Continue tween by ID if provided tween is paused
     /// </summary>
-    public static void ContinueEvent(string id)
+    public static void ContinueTween(string id)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id && myCall[i].paused)
                 myCall[i].Resume();
     }
-
-    /// <summary>
-    /// Continue event by ID if provided event is paused
-    /// </summary>
-    public static void ContinueEvent(GameObject id)
+    public static void ContinueTween(GameObject id)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString() && myCall[i].paused)
@@ -265,72 +257,67 @@ public class mTween : MonoBehaviour
     }
 
     /// <summary>
-    /// Pause all queued events
+    /// Pause all queued tweens
     /// </summary>
-    public static void PauseAllEvents()
+    public static void PauseAllTweens()
     {
         for (int i = 0; i < myCall.Count; i++)
             myCall[i].Pause();
     }
 
     /// <summary>
-    /// Continue all events
+    /// Continue all tweens
     /// </summary>
-    public static void ContinueAllEvents()
+    public static void ContinueAllTweens()
     {
         for (int i = 0; i < myCall.Count; i++)
             myCall[i].Resume();
     }
 
     /// <summary>
-    /// Adds more time to an event
+    /// Adds more time to an tween
     /// </summary>
-    public static void DelayEvent(string id, float delay)
+    public static void DelayTween(string id, float delay)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
-                myCall[i].AddDelay(delay);
+                myCall[i].AddDuration(delay);
     }
-
-    /// <summary>
-    /// Adds more time to an event
-    /// </summary>
-    public static void DelayEvent(GameObject id, float delay)
+    public static void DelayTween(GameObject id, float delay)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
-                myCall[i].AddDelay(delay);
+                myCall[i].AddDuration(delay);
     }
 
     /// <summary>
-    /// Adds more time to an event
+    /// Adds more time to an tween. NOTE: UNSAFE
     /// </summary>
-    public static void DelayEventUnsafe(string id, float delay)
+    public static void DelayTweenUnsafe(string id, float delay)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id)
-                myCall[i].AddDelayUnsafe(delay);
+                myCall[i].AddDurationUnsafe(delay);
     }
-
-    /// <summary>
-    /// Adds more time to an event
-    /// </summary>
-    public static void DelayEventUnsafe(GameObject id, float delay)
+    public static void DelayTweenUnsafe(GameObject id, float delay)
     {
         for (int i = 0; i < myCall.Count; i++)
             if (myCall[i].GetID() == id.GetInstanceID().ToString())
-                myCall[i].AddDelayUnsafe(delay);
+                myCall[i].AddDurationUnsafe(delay);
     }
 
-    public static int GetActiveTimelinesCount() => myCall.Count;
+    /// <summary>
+    /// Get the number of active tweens
+    /// </summary>
+    public static int GetActiveTweensCount() => myCall.Count;
 
-    private void UpdateQueuedEvents()
+    private void UpdateQueuedTweens()
     {
         if (myCall.Count == 0) return;
 
         for (int i = 0; i < myCall.Count; i++)
         {
-            //Check if event was canceled, remove current timeline if true
+            //Check if tween was canceled, remove current timeline if true
             if (myCall[i].canceled)
             {
                 myCall.Remove(myCall[i]);
@@ -338,7 +325,7 @@ public class mTween : MonoBehaviour
                 continue;
             }
 
-            //Check if event was paused, resume after unscaledPauseTime if one was provided
+            //Check if tween was paused, resume after unscaledPauseTime if one was provided
             if (myCall[i].paused)
             {
                 myCall[i].UpdatePauseTime();
@@ -351,7 +338,7 @@ public class mTween : MonoBehaviour
                 continue;
             }
 
-            //Check if event has an interval, delay the call between Complete and Start if true
+            //Check if tween has an interval, delay the call between Complete and Start if true
             if (myCall[i].onInterval)
             {
                 myCall[i].UpdateIntervalTime();
@@ -374,7 +361,7 @@ public class mTween : MonoBehaviour
             {
                 myCall[i].unscaledProgress = myCall[i].durationWithDelay;
 
-                //Check if timeline is set to repeat
+                //Check if tween is set to repeat
                 if (myCall[i].repeat)
                 {
                     myCall[i].durationWithDelay = myCall[i].duration;
@@ -401,13 +388,13 @@ public class mTween : MonoBehaviour
                     continue;
                 }
 
-                //Call Complete and remove self from active mTimelines
+                //Call Complete and remove self from active tweens
                 myCall[i].Complete();
                 myCall.Remove(myCall[i]);
                 continue;
             }
 
-            //Update time of active mTimeline
+            //Update time of active tweens
             myCall[i].Update();
         }
     }
