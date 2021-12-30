@@ -7,6 +7,26 @@ public partial class mTimeline
 {
     #region Transfrom operations
     /// <summary>
+    /// Rotate Transform around a center with a given radius
+    /// </summary>
+    public mTimeline MoveAlongCircle(Transform t, float r)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        return this;
+    }
+    public mTimeline MoveAlongCircle(Transform t, float r, bool inverted)
+    {
+        Vector3 center = new Vector3(t.position.x, t.position.y - r, t.position.z);
+        if (!inverted)
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), 0f, Mathf.PI * 2));
+        else
+            lerpFloat.Add(new floatLerp((i) => t.position = center + new Vector3(Mathf.Sin(i) * r, Mathf.Cos(i) * r), Mathf.PI * 2, 0f));
+
+        return this;
+    }
+
+    /// <summary>
     /// Rotates Transform to face a target
     /// </summary>
     public mTimeline RotateTowardsTarget(Transform follower, Transform Target)
