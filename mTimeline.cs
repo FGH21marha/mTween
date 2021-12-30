@@ -557,6 +557,32 @@ using System.Collections.Generic;
         return this;
     }
 
+    protected struct floatLerp
+    {
+        public Action<float> a;
+        public float start;
+        public float end;
+        public AnimationCurve curve;
+
+        public floatLerp(Action<float> a, float start, float end)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = new AnimationCurve();
+            curve.AddKey(0f, 0f);
+            curve.AddKey(1f, 1f);
+        }
+        public floatLerp(Action<float> a, float start, float end, AnimationCurve curve)
+        {
+            this.a = a;
+            this.start = start;
+            this.end = end;
+            this.curve = curve;
+        }
+    }
+    protected List<floatLerp> lerpFloat = new List<floatLerp>();
+
     protected struct Vector2Lerp
     {
         public Action<Vector2> a;
@@ -655,6 +681,39 @@ using System.Collections.Generic;
             this.gradient = gradient;
             this.curve = curve;
         }
+        public ColorLerp(Action<Color> sr, Color from, Color to)
+        {
+            this.color = sr;
+
+            List<Color> colors = new List<Color>();
+            colors.Add(from);
+            colors.Add(to);
+
+            Gradient gradient = new Gradient();
+            GradientColorKey[] colorKeys = new GradientColorKey[colors.Count];
+            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colors.Count];
+
+            this.gradient = gradient;
+            this.curve = new AnimationCurve();
+            curve.AddKey(0f, 0f);
+            curve.AddKey(1f, 1f);
+        }
+        public ColorLerp(Action<Color> sr, Color from, Color to, AnimationCurve curve)
+        {
+            this.color = sr;
+
+            List<Color> colors = new List<Color>();
+            colors.Add(from);
+            colors.Add(to);
+
+            Gradient gradient = new Gradient();
+            GradientColorKey[] colorKeys = new GradientColorKey[colors.Count];
+            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[colors.Count];
+
+            this.gradient = gradient;
+            this.curve = new AnimationCurve();
+            this.curve = curve;
+        }
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
 
@@ -719,6 +778,20 @@ using System.Collections.Generic;
         onUpdate?.Invoke();
         onUpdate01?.Invoke(curve.Evaluate(Remap(Mathf.Clamp(unscaledProgress, 0f, duration), 0f, duration, 0, 1)));
         onUpdateFloat?.Invoke(progress);
+
+        if (lerpFloat.Count > 0)
+        {
+            for (int i = 0; i < lerpFloat.Count; i++)
+            {
+                if (lerpFloat[i].a == null)
+                {
+                    lerpFloat.Remove(lerpFloat[i]);
+                    i--;
+                }
+
+                lerpFloat[i].a?.Invoke(Mathf.LerpUnclamped(lerpFloat[i].start, lerpFloat[i].end, lerpFloat[i].curve.Evaluate(progress)));
+            }
+        }
 
         if (lerpVector2.Count > 0)
         {

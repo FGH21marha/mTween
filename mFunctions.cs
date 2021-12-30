@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
+using TMPro;
 
 public partial class mTimeline
 {
+    #region Transfrom operations
     /// <summary>
     /// Rotates Transform to face a target
     /// </summary>
@@ -255,7 +259,9 @@ public partial class mTimeline
         lerpRot.Add(new RotationLerp((i) => t.localRotation = i, Quaternion.Euler(from), Quaternion.Euler(to), curve));
         return this;
     }
+    #endregion
 
+    #region RectTransform operations
     /// <summary>
     /// Moves RectTransform towards position
     /// </summary>
@@ -411,4 +417,425 @@ public partial class mTimeline
         lerpRot.Add(new RotationLerp((i) => t.localRotation = i, Quaternion.Euler(from), Quaternion.Euler(to), curve));
         return this;
     }
+    #endregion
+
+    #region Alpha operations
+    /// <summary>
+    /// Lerps CanvasGroup alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(CanvasGroup t, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.alpha = i, t.alpha, to));
+        return this;
+    }
+    public mTimeline AlphaTo(CanvasGroup t, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.alpha = i, t.alpha, to, curve));
+        return this;
+    }
+    public mTimeline AlphaTo(CanvasGroup t, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.alpha = i, from, to));
+        return this;
+    }
+    public mTimeline AlphaTo(CanvasGroup t, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.alpha = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Image alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(Image t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(Image t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(Image t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(Image t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps RawImage alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(RawImage t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(RawImage t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(RawImage t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(RawImage t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Text alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(Text t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(Text t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(Text t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(Text t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps SpriteRenderer alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(SpriteRenderer t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(SpriteRenderer t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(SpriteRenderer t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(SpriteRenderer t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    #endregion
+
+    #region TextMesh operations
+    /// <summary>
+    /// Lerps TextMesh Color towards value
+    /// </summary>
+    public mTimeline ColorTo(TextMesh t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        return this;
+    }
+    public mTimeline ColorTo(TextMesh t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        return this;
+    }
+    public mTimeline ColorTo(TextMesh t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        return this;
+    }
+    public mTimeline ColorTo(TextMesh t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps TextMeshPro Color towards value
+    /// </summary>
+    public mTimeline ColorTo(TextMeshPro t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        return this;
+    }
+    public mTimeline ColorTo(TextMeshPro t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        return this;
+    }
+    public mTimeline ColorTo(TextMeshPro t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        return this;
+    }
+    public mTimeline ColorTo(TextMeshPro t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps TextMeshProUGUI Color towards value
+    /// </summary>
+    public mTimeline ColorTo(TextMeshProUGUI t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        return this;
+    }
+    public mTimeline ColorTo(TextMeshProUGUI t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        return this;
+    }
+    public mTimeline ColorTo(TextMeshProUGUI t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        return this;
+    }
+    public mTimeline ColorTo(TextMeshProUGUI t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps TextMesh alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(TextMesh t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMesh t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMesh t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMesh t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps TextMeshPro alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(TextMeshPro t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMeshPro t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMeshPro t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMeshPro t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps TextMeshProUGUI alpha towards value
+    /// </summary>
+    public mTimeline AlphaTo(TextMeshProUGUI t, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMeshProUGUI t, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMeshProUGUI t, float from, float to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to)));
+        return this;
+    }
+    public mTimeline AlphaTo(TextMeshProUGUI t, float from, float to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, new Color(t.color.r, t.color.b, t.color.b, from), new Color(t.color.r, t.color.b, t.color.b, to), curve));
+        return this;
+    }
+    #endregion
+
+    #region Light operations
+    /// <summary>
+    /// Lerps Light Intensity towards value
+    /// </summary>
+    public mTimeline IntensityTo(Light t, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.intensity = i, t.intensity, to));
+        return this;
+    }
+    public mTimeline IntensityTo(Light t, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.intensity = i, t.intensity, to, curve));
+        return this;
+    }
+    public mTimeline IntensityTo(Light t, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.intensity = i, from, to));
+        return this;
+    }
+    public mTimeline IntensityTo(Light t, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.intensity = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Light range towards value
+    /// </summary>
+    public mTimeline RangeTo(Light t, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.range = i, t.range, to));
+        return this;
+    }
+    public mTimeline RangeTo(Light t, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.range = i, t.range, to, curve));
+        return this;
+    }
+    public mTimeline RangeTo(Light t, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.range = i, from, to));
+        return this;
+    }
+    public mTimeline RangeTo(Light t, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.range = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Light Color towards value
+    /// </summary>
+    public mTimeline ColorTo(Light t, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to));
+        return this;
+    }
+    public mTimeline ColorTo(Light t, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, t.color, to, curve));
+        return this;
+    }
+    public mTimeline ColorTo(Light t, Color from, Color to)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to));
+        return this;
+    }
+    public mTimeline ColorTo(Light t, Color from, Color to, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, from, to, curve));
+        return this;
+    }
+    #endregion
+
+    #region Audio operations
+    /// <summary>
+    /// Lerps Audio volume towards value
+    /// </summary>
+    public mTimeline VolumeTo(AudioSource t, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.volume = i, t.volume, to));
+        return this;
+    }
+    public mTimeline VolumeTo(AudioSource t, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.volume = i, t.volume, to, curve));
+        return this;
+    }
+    public mTimeline VolumeTo(AudioSource t, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.volume = i, from, to));
+        return this;
+    }
+    public mTimeline VolumeTo(AudioSource t, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.volume = i, from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps AudioMixerGroup value towards value
+    /// </summary>
+    public mTimeline VolumeTo(AudioMixerGroup t, string value, float to)
+    {
+        float o;
+        t.audioMixer.GetFloat("Volume", out o);
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), o, to));
+        return this;
+    }
+    public mTimeline VolumeTo(AudioMixerGroup t, string value, float to, AnimationCurve curve)
+    {
+        float o;
+        t.audioMixer.GetFloat("Volume", out o);
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), o, to, curve));
+        return this;
+    }
+    public mTimeline VolumeTo(AudioMixerGroup t, string value, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), from, to));
+        return this;
+    }
+    public mTimeline VolumeTo(AudioMixerGroup t, string value, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.audioMixer.SetFloat(value, i), from, to, curve));
+        return this;
+    }
+
+    /// <summary>
+    /// Lerps Audio pitch towards value
+    /// </summary>
+    public mTimeline PitchTo(AudioSource t, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.pitch = i, t.pitch, to));
+        return this;
+    }
+    public mTimeline PitchTo(AudioSource t, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.pitch = i, t.pitch, to, curve));
+        return this;
+    }
+    public mTimeline PitchTo(AudioSource t, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.pitch = i, from, to));
+        return this;
+    }
+    public mTimeline PitchTo(AudioSource t, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => t.pitch = i, from, to, curve));
+        return this;
+    }
+    #endregion
 }
