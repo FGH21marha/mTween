@@ -92,7 +92,7 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Triggers an action after x amount of time
     /// </summary>
-    public static Tween DelayedCall(float time, Action OnComplete)
+    public static Tween DelayedCall(Action OnComplete, float time)
     {
         Tween i = new Tween(time).SetOnComplete(OnComplete);
         activeTweens.Add(i);
@@ -105,7 +105,7 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Triggers an action after x amount of time
     /// </summary>
-    public static Tween DelayedCall(GameObject id, float time, Action OnComplete)
+    public static Tween DelayedCall(GameObject id, Action OnComplete, float time)
     {
         Tween i = new Tween(id, time).SetOnComplete(OnComplete);
         activeTweens.Add(i);
