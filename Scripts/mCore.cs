@@ -110,6 +110,11 @@ using System.Collections.Generic;
         repeatCount = n;
         return this;
     }
+    public Tween Repeat(bool state)
+    {
+        repeat = state;
+        return this;
+    }
 
     /// <summary>
     /// Cancels the tween

@@ -20,13 +20,20 @@ public class PanelAnimation : MonoBehaviour
     public Gradient gradient;
 
     private RectTransform t;
+    private Tween myTween;
     private void Awake() => t = GetComponent<RectTransform>();
+
+    public void SetRepeat(bool state)
+    {
+        if(state)
+            myTween?.Repeat();
+    }
 
     public void Animate()
     {
-        mTween.CancelTween(this);
+        myTween?.Cancel();
 
-        mTween.NewTween(this, 1f)
+        myTween = mTween.NewTween(1f)
             .MoveToLocal(t, moveFrom, moveTo, moveCurve)
             .AngleTo(t, angleFrom, angleTo, t.forward, rotateCurve)
             .ScaleTo(t, scaleFrom, scaleTo, scaleCurve)
