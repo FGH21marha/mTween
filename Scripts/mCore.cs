@@ -894,6 +894,7 @@ using System.Collections.Generic;
     /// </summary>
     public void Complete()
     {
+        ResetLerps();
         onComplete?.Invoke();
     }
 
