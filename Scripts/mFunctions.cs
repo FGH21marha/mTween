@@ -1311,6 +1311,9 @@ public partial class Tween
     #endregion
 
     #region UI operations
+    /// <summary>
+    /// Lerps Slider towards value
+    /// </summary>
     public Tween SliderValueTo(Slider slider, float to)
     {
         lerpFloat.Add(new floatLerp((i) => slider.value = i, slider.value, to));
