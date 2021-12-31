@@ -114,6 +114,42 @@ using System.Collections.Generic;
     }
 
     /// <summary>
+    /// Pause tween
+    /// </summary>
+    public Tween Pause(float duration)
+    {
+        if (canceled) return this;
+
+        pauseTime = duration;
+        paused = true;
+        onPause?.Invoke();
+
+        return this;
+    }
+    public Tween Pause()
+    {
+        if (canceled) return this;
+
+        paused = true;
+        onPause?.Invoke();
+
+        return this;
+    }
+
+    /// <summary>
+    /// Resumes tween
+    /// </summary>
+    public Tween Resume()
+    {
+        if (canceled) return this;
+
+        paused = false;
+        onContinue?.Invoke();
+
+        return this;
+    } 
+
+    /// <summary>
     /// Executes the tween n times
     /// </summary>
     public Tween ExecuteNTimes(int n)
@@ -830,7 +866,7 @@ using System.Collections.Generic;
     protected List<CustomAction> completedCustomActions = new List<CustomAction>();
 
     /// <summary>
-    /// Starts the tween
+    /// Starts the tween. DO NOT USE
     /// </summary>
     public void Start() 
     {
@@ -839,7 +875,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Called on full tween completion
+    /// Called on full tween completion. DO NOT USE
     /// </summary>
     public void Complete()
     {
@@ -847,7 +883,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Called on completed tween loop
+    /// Called on completed tween loop. DO NOT USE
     /// </summary>
     public void CompletedRun()
     {
@@ -971,7 +1007,7 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Called on tween cancellation
+    /// Called on tween cancellation. DO NOT USE
     /// </summary>
     public void OnCancel()
     {
@@ -985,36 +1021,6 @@ using System.Collections.Generic;
         if (completeLoopTriggeredOnCancel)
             onCompletedRun?.Invoke();
     }
-
-    /// <summary>
-    /// Pause tween
-    /// </summary>
-    public void Pause(float duration)
-    {
-        if (canceled) return;
-
-        pauseTime = duration;
-        paused = true;
-        onPause?.Invoke();
-    }
-    public void Pause()
-    {
-        if (canceled) return;
-
-        paused = true;
-        onPause?.Invoke();
-    }
-
-    /// <summary>
-    /// Resumes tween
-    /// </summary>
-    public void Resume()
-    {
-        if (canceled) return;
-
-        paused = false;
-        onContinue?.Invoke();
-    } 
     public void UpdatePauseTime() => unscaledPauseTime += Time.deltaTime;
     public void UpdateIntervalTime() => unscaledIntervalTime += Time.deltaTime;
 
