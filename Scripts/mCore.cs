@@ -121,6 +121,7 @@ using System.Collections.Generic;
     /// </summary>
     public Tween Cancel()
     {
+        ResetLerps();
         this.canceled = true;
         return this;
     }
@@ -1025,8 +1026,6 @@ using System.Collections.Generic;
     public void OnCancel()
     {
         if (canceled) return;
-
-        ResetLerps();
 
         onCancel?.Invoke();
 

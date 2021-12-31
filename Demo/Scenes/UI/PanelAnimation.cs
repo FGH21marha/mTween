@@ -32,7 +32,7 @@ public class PanelAnimation : MonoBehaviour
 
         myTween = mTween.NewTween(1f)
             .Repeat(repeat)
-            .MoveToLocal(t, moveFrom, moveTo, moveCurve)
+            .MoveTo(t, moveFrom, moveTo, moveCurve)
             .AngleTo(t, angleFrom, angleTo, t.forward, rotateCurve)
             .ScaleTo(t, scaleFrom, scaleTo, scaleCurve)
             .ColorTo(t.GetComponent<Image>(), gradient, gradientCurve);
