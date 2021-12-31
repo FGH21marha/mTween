@@ -76,6 +76,16 @@ using System.Collections.Generic;
         ID = id;
         unscaledProgress = 0f;
     }
+    public Tween(object id, float duration)
+    {
+        curve = new AnimationCurve();
+        curve.AddKey(0f, 0f);
+        curve.AddKey(1f, 1f);
+        this.duration = duration;
+        durationWithDelay = duration;
+        ID = id.ToString();
+        unscaledProgress = 0f;
+    }
 
     /// <summary>
     /// Returns progress based on input curve
@@ -301,6 +311,11 @@ using System.Collections.Generic;
     public Tween SetID(GameObject id)
     {
         ID = id.GetInstanceID().ToString();
+        return this;
+    }
+    public Tween SetID(object id)
+    {
+        ID = id.ToString();
         return this;
     }
 

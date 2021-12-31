@@ -8,13 +8,11 @@ public class mTween : MonoBehaviour
     #region Monobehaviour
 
     public static mTween instance;
-
     private void Awake()
     {
         if(instance == null)
             instance = this;
     }
-
     private void OnValidate()
     {
         if (instance == null)
@@ -25,15 +23,12 @@ public class mTween : MonoBehaviour
                 CreateNewInstance();
         }
     }
-
     void LateUpdate() => StartCoroutine(LateLateUpdate());
-
     private IEnumerator LateLateUpdate()
     {
         yield return new WaitForEndOfFrame();
         UpdateQueuedTweens();
     }
-
     private static void CreateNewInstance()
     {
         if (instance == null)
@@ -62,10 +57,6 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-
-    /// <summary>
-    /// Queue new tween to be called after a period of time, returns call onComplete and onUpdate
-    /// </summary>
     public static Tween NewTween(GameObject id, float time)
     {
         Tween i = new Tween(id, time);
@@ -75,11 +66,16 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-
-    /// <summary>
-    /// Queue new tween to be called after a period of time, returns call onComplete and onUpdate
-    /// </summary>
     public static Tween NewTween(string id, float time)
+    {
+        Tween i = new Tween(id, time);
+        activeTweens.Add(i);
+
+        CreateNewInstance();
+
+        return i;
+    }
+    public static Tween NewTween(object id, float time)
     {
         Tween i = new Tween(id, time);
         activeTweens.Add(i);
@@ -145,6 +141,12 @@ public class mTween : MonoBehaviour
             if (activeTweens[i].GetID() == id.GetInstanceID().ToString())
                 activeTweens[i].Cancel();
     }
+    public static void CancelTween(object id)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString())
+                activeTweens[i].Cancel();
+    }
     public static void CancelTween(GameObject id, float t)
     {
         for (int i = 0; i < activeTweens.Count; i++)
@@ -155,6 +157,15 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < activeTweens.Count; i++)
             if (activeTweens[i].GetID() == id)
+            {
+                activeTweens[i].Cancel();
+                activeTweens.Add(new Tween(t).SetOnComplete(() => activeTweens[i].Cancel()));
+            }
+    }
+    public static void CancelTween(object id, float t)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString())
             {
                 activeTweens[i].Cancel();
                 activeTweens.Add(new Tween(t).SetOnComplete(() => activeTweens[i].Cancel()));
@@ -176,6 +187,12 @@ public class mTween : MonoBehaviour
             if (activeTweens[i].GetID() == id.GetInstanceID().ToString() && !activeTweens[i].paused)
                 activeTweens[i].Pause();
     }
+    public static void PauseTween(object id)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString() && !activeTweens[i].paused)
+                activeTweens[i].Pause();
+    }
     public static void PauseTween(string id, float duration)
     {
         for (int i = 0; i < activeTweens.Count; i++)
@@ -186,6 +203,12 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < activeTweens.Count; i++)
             if (activeTweens[i].GetID() == id.GetInstanceID().ToString() && !activeTweens[i].paused)
+                activeTweens[i].Pause(duration);
+    }
+    public static void PauseTween(object id, float duration)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString() && !activeTweens[i].paused)
                 activeTweens[i].Pause(duration);
     }
 
@@ -202,6 +225,12 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < activeTweens.Count; i++)
             if (activeTweens[i].GetID() == id.GetInstanceID().ToString() && activeTweens[i].paused)
+                activeTweens[i].Resume();
+    }
+    public static void ContinueTween(object id)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString() && activeTweens[i].paused)
                 activeTweens[i].Resume();
     }
 
@@ -238,6 +267,12 @@ public class mTween : MonoBehaviour
             if (activeTweens[i].GetID() == id.GetInstanceID().ToString())
                 activeTweens[i].AddDuration(delay);
     }
+    public static void DelayTween(object id, float delay)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString())
+                activeTweens[i].AddDuration(delay);
+    }
 
     /// <summary>
     /// Adds more time to a tween. Adds to the total progress time which will continually delay the tween if used in repeat
@@ -252,6 +287,12 @@ public class mTween : MonoBehaviour
     {
         for (int i = 0; i < activeTweens.Count; i++)
             if (activeTweens[i].GetID() == id.GetInstanceID().ToString())
+                activeTweens[i].AddDurationUnsafe(delay);
+    }
+    public static void DelayTweenUnsafe(object id, float delay)
+    {
+        for (int i = 0; i < activeTweens.Count; i++)
+            if (activeTweens[i].GetID() == id.ToString())
                 activeTweens[i].AddDurationUnsafe(delay);
     }
 
