@@ -804,8 +804,12 @@ using System.Collections.Generic;
         public void Reset() => color?.Invoke(gradient.colorKeys[0].color);
     }
     protected List<ColorLerp> lerpColor = new List<ColorLerp>();
-    protected void CreateColorList(Color from, Color to, out Gradient gradient, out GradientColorKey[] colorKeys, out GradientAlphaKey[] alphaKeys)
+    protected Gradient GetGradient(Color from, Color to)
     {
+        Gradient gradient;
+        GradientColorKey[] colorKeys;
+        GradientAlphaKey[] alphaKeys;
+
         List<Color> colors = new List<Color>();
         colors.Add(from);
         colors.Add(to);
@@ -824,19 +828,10 @@ using System.Collections.Generic;
             alphaKeys[i].alpha = colors[i].a;
             alphaKeys[i].time = i / (alphaKeys.Length - 1);
         }
-    }
-    protected Gradient GetGradient(Color from, Color to)
-    {
-        Gradient gradient;
-        GradientColorKey[] colorKeys;
-        GradientAlphaKey[] alphaKeys;
-
-        CreateColorList(from, to, out gradient, out colorKeys, out alphaKeys);
 
         gradient.SetKeys(colorKeys, alphaKeys);
         return gradient;
     }
-
     protected struct ContinuousTargetLerp
     {
         public Transform transform;
