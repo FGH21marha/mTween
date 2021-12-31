@@ -287,7 +287,7 @@ MonoBehaviour:
     m_PostInfinity: 0
     m_RotationOrder: 4
   scaleFrom: {x: 600, y: 400}
-  scaleTo: {x: 500, y: 500}
+  scaleTo: {x: 400, y: 600}
   gradientCurve:
     serializedVersion: 2
     m_Curve:
