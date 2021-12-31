@@ -1310,6 +1310,19 @@ public partial class Tween
     }
     #endregion
 
+    #region UI operations
+    public Tween SliderValueTo(Slider slider, float from, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => slider.value = i, from, to));
+        return this;
+    }
+    public Tween SliderValueTo(Slider slider, float from, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => slider.value = i, from, to, curve));
+        return this;
+    }
+    #endregion
+
     #region Light operations
     /// <summary>
     /// Lerps Light Intensity towards value
