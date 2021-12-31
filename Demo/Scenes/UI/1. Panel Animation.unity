@@ -288,6 +288,30 @@ MonoBehaviour:
     m_RotationOrder: 4
   scaleFrom: {x: 600, y: 400}
   scaleTo: {x: 500, y: 500}
+  gradientCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   gradient:
     serializedVersion: 2
     key0: {r: 0.5019608, g: 0.6431373, b: 0.6431373, a: 1}

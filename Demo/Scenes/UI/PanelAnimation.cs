@@ -16,6 +16,7 @@ public class PanelAnimation : MonoBehaviour
     public Vector2 scaleFrom, scaleTo;
 
     [Header("Color")]
+    public AnimationCurve gradientCurve;
     public Gradient gradient;
 
     private RectTransform t;
@@ -29,6 +30,6 @@ public class PanelAnimation : MonoBehaviour
             .MoveToLocal(t, moveFrom, moveTo, moveCurve)
             .AngleTo(t, angleFrom, angleTo, t.forward, rotateCurve)
             .ScaleTo(t, scaleFrom, scaleTo, scaleCurve)
-            .ColorTo(t.GetComponent<Image>(), gradient);
+            .ColorTo(t.GetComponent<Image>(), gradient, gradientCurve);
     }
 }
