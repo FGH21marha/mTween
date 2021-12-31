@@ -290,38 +290,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0.0012978986
-      inSlope: -0.014691405
-      outSlope: -0.014691405
+      inSlope: -3.1526942
+      outSlope: -3.1526942
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.28049788
+      outWeight: 0.043583535
     - serializedVersion: 3
-      time: 0.2502817
-      value: -0.39007545
-      inSlope: 0.010833449
-      outSlope: 0.010833449
+      time: 0.5
+      value: -0.0022239294
+      inSlope: 3.0811465
+      outSlope: 3.0811465
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7518854
-      value: 0.397493
-      inSlope: 0.036089305
-      outSlope: 0.036089305
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.041162252
     - serializedVersion: 3
       time: 1
       value: -0.000012516975
-      inSlope: -0.0038165187
-      outSlope: -0.0038165187
+      inSlope: -3.295181
+      outSlope: -3.295181
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.29466435
+      inWeight: 0.043583512
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -489,7 +480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -358.11}
+  m_AnchoredPosition: {x: 0, y: -370}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &421248802
@@ -1059,7 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5019608, g: 0.6431373, b: 0.6431373, a: 1}
+  m_Color: {r: 0.7843138, g: 0.5019608, b: 0.6431373, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
