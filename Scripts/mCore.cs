@@ -37,7 +37,7 @@ using System.Collections.Generic;
     public bool repeat;
     public bool completeTriggeredOnCancel;
     public bool completeLoopTriggeredOnCancel;
-    public bool restoreOnCancel = true;
+    public bool restoreOnCancel = false;
 
     public float min = 0f;
     public float max = 1f;
@@ -122,9 +122,6 @@ using System.Collections.Generic;
     public Tween Cancel()
     {
         this.canceled = true;
-
-        ResetLerps();
-
         return this;
     }
 
@@ -289,11 +286,11 @@ using System.Collections.Generic;
     }
 
     /// <summary>
-    /// Does not restore the state of the tweened object when the tween is canceled
+    /// Restore the state of the tweened object when the tween is canceled
     /// </summary>
-    public Tween DontRestoreOnCancel()
+    public Tween RestoreOnCancel()
     {
-        restoreOnCancel = false;
+        restoreOnCancel = true;
         return this;
     }
 
@@ -1028,6 +1025,8 @@ using System.Collections.Generic;
     public void OnCancel()
     {
         if (canceled) return;
+
+        ResetLerps();
 
         onCancel?.Invoke();
 
