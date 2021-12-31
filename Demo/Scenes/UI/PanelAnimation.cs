@@ -21,22 +21,22 @@ public class PanelAnimation : MonoBehaviour
 
     private RectTransform t;
     private Tween myTween;
+    private bool repeat;
     private void Awake() => t = GetComponent<RectTransform>();
 
-    public void SetRepeat(bool state)
-    {
-        if(state)
-            myTween?.Repeat();
-    }
+    public void SetRepeat(bool state) => repeat = state;
 
     public void Animate()
     {
-        myTween?.Cancel();
+        Cancel();
 
         myTween = mTween.NewTween(1f)
+            .Repeat(repeat)
             .MoveToLocal(t, moveFrom, moveTo, moveCurve)
             .AngleTo(t, angleFrom, angleTo, t.forward, rotateCurve)
             .ScaleTo(t, scaleFrom, scaleTo, scaleCurve)
             .ColorTo(t.GetComponent<Image>(), gradient, gradientCurve);
     }
+
+    public void Cancel() => myTween?.Cancel();
 }
