@@ -1311,6 +1311,16 @@ public partial class Tween
     #endregion
 
     #region UI operations
+    public Tween SliderValueTo(Slider slider, float to)
+    {
+        lerpFloat.Add(new floatLerp((i) => slider.value = i, slider.value, to));
+        return this;
+    }
+    public Tween SliderValueTo(Slider slider, float to, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => slider.value = i, slider.value, to, curve));
+        return this;
+    }
     public Tween SliderValueTo(Slider slider, float from, float to)
     {
         lerpFloat.Add(new floatLerp((i) => slider.value = i, from, to));
