@@ -1476,6 +1476,16 @@ public partial class Tween
     /// <summary>
     /// Lerps Camera backgroundColor towards value. NOTE: Camera clear flags must be set to Solid Color
     /// </summary>
+    public Tween ColorTo(Camera camera, Color end)
+    {
+        lerpColor.Add(new ColorLerp((i) => camera.backgroundColor = i, GetGradient(camera.backgroundColor, end)));
+        return this;
+    }
+    public Tween ColorTo(Camera camera, Color end, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => camera.backgroundColor = i, GetGradient(camera.backgroundColor, end), curve));
+        return this;
+    }
     public Tween ColorTo(Camera camera, Color start, Color end)
     {
         lerpColor.Add(new ColorLerp((i) => camera.backgroundColor = i, GetGradient(start, end)));
@@ -1500,6 +1510,16 @@ public partial class Tween
     /// <summary>
     /// Interpolate Camera field of view
     /// </summary>
+    public Tween FieldOfViewTo(Camera camera, float end)
+    {
+        lerpFloat.Add(new floatLerp((i) => camera.fieldOfView = i, camera.fieldOfView, end));
+        return this;
+    }
+    public Tween FieldOfViewTo(Camera camera, float end, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => camera.fieldOfView = i, camera.fieldOfView, end, curve));
+        return this;
+    }
     public Tween FieldOfViewTo(Camera camera, float start, float end)
     {
         lerpFloat.Add(new floatLerp((i) => camera.fieldOfView = i, start, end));
@@ -1514,6 +1534,16 @@ public partial class Tween
     /// <summary>
     /// Interpolate Camera ortographic size
     /// </summary>
+    public Tween OrtographicSizeTo(Camera camera, float end)
+    {
+        lerpFloat.Add(new floatLerp((i) => camera.orthographicSize = i, camera.orthographicSize, end));
+        return this;
+    }
+    public Tween OrtographicSizeTo(Camera camera, float end, AnimationCurve curve)
+    {
+        lerpFloat.Add(new floatLerp((i) => camera.orthographicSize = i, camera.orthographicSize, end, curve));
+        return this;
+    }
     public Tween OrtographicSizeTo(Camera camera, float start, float end)
     {
         lerpFloat.Add(new floatLerp((i) => camera.orthographicSize = i, start, end));
