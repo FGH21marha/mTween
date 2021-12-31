@@ -893,6 +893,16 @@ public partial class Tween
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
+    public Tween ColorTo(Text t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(Text t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
+        return this;
+    }
 
     /// <summary>
     /// Lerps Image Color towards value
@@ -917,6 +927,17 @@ public partial class Tween
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
+    public Tween ColorTo(Image t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(Image t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
+        return this;
+    }
+
 
     /// <summary>
     /// Lerps RawImage Color towards value
@@ -941,6 +962,16 @@ public partial class Tween
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
+    public Tween ColorTo(RawImage t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(RawImage t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
+        return this;
+    }
 
     /// <summary>
     /// Lerps SpriteRenderer Color towards value
@@ -963,6 +994,16 @@ public partial class Tween
     public Tween ColorTo(SpriteRenderer t, Color from, Color to, AnimationCurve curve)
     {
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+    public Tween ColorTo(SpriteRenderer t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(SpriteRenderer t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
         return this;
     }
 
@@ -991,6 +1032,16 @@ public partial class Tween
     public Tween ColorTo(Material t, string value, Color from, Color to, AnimationCurve curve)
     {
         lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), GetGradient(from, to), curve));
+        return this;
+    }
+    public Tween ColorTo(Material t, string value, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), gradient));
+        return this;
+    }
+    public Tween ColorTo(Material t, string value, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.SetColor(value, i), gradient, curve));
         return this;
     }
 
@@ -1088,6 +1139,16 @@ public partial class Tween
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
+    public Tween ColorTo(TextMesh t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(TextMesh t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
+        return this;
+    }
 
     /// <summary>
     /// Lerps TextMeshPro Color towards value
@@ -1112,6 +1173,16 @@ public partial class Tween
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
         return this;
     }
+    public Tween ColorTo(TextMeshPro t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(TextMeshPro t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
+        return this;
+    }
 
     /// <summary>
     /// Lerps TextMeshProUGUI Color towards value
@@ -1134,6 +1205,16 @@ public partial class Tween
     public Tween ColorTo(TextMeshProUGUI t, Color from, Color to, AnimationCurve curve)
     {
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+    public Tween ColorTo(TextMeshProUGUI t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(TextMeshProUGUI t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
         return this;
     }
 
@@ -1298,6 +1379,16 @@ public partial class Tween
     public Tween ColorTo(Light t, Color from, Color to, AnimationCurve curve)
     {
         lerpColor.Add(new ColorLerp((i) => t.color = i, GetGradient(from, to), curve));
+        return this;
+    }
+    public Tween ColorTo(Light t, Gradient gradient)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient));
+        return this;
+    }
+    public Tween ColorTo(Light t, Gradient gradient, AnimationCurve curve)
+    {
+        lerpColor.Add(new ColorLerp((i) => t.color = i, gradient, curve));
         return this;
     }
     #endregion
