@@ -294,6 +294,11 @@ using System.Collections.Generic;
         restoreOnCancel = true;
         return this;
     }
+    public Tween RestoreOnCancel(bool restore)
+    {
+        restoreOnCancel = restore;
+        return this;
+    }
 
     /// <summary>
     /// Sets a unique ID for this tween
