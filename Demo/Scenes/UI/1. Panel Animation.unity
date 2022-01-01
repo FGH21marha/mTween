@@ -382,7 +382,7 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0.5019608, g: 0.6431373, b: 0.6431373, a: 1}
     key1: {r: 0.754717, g: 0.21054772, b: 0.754717, a: 1}
-    key2: {r: 1, g: 0.70436865, b: 0, a: 0}
+    key2: {r: 0.7830189, g: 0.5352911, b: 0, a: 0}
     key3: {r: 0.16673449, g: 0.7830189, b: 0.18123537, a: 0}
     key4: {r: 0.5019608, g: 0.6431373, b: 0.6431373, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -964,7 +964,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1034461795
 GameObject:
   m_ObjectHideFlags: 0
