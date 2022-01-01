@@ -36,6 +36,9 @@ public class PanelAnimation : MonoBehaviour
         myTween?.RestoreOnCancel(state);
     }
 
+    public void Pause() => myTween?.Pause();
+    public void Resume() => myTween?.Resume();
+
     public void Animate()
     {
         Cancel();
