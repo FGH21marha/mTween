@@ -21,8 +21,8 @@ public class PanelAnimation : MonoBehaviour
 
     private RectTransform t;
     private Tween myTween;
-    private bool repeat;
-    private bool reset;
+    private bool repeat = false;
+    private bool reset = true;
     private void Awake() => t = GetComponent<RectTransform>();
 
     public void Repeat(bool state) => repeat = state;
