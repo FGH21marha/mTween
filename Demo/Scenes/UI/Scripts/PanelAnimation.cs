@@ -22,9 +22,11 @@ public class PanelAnimation : MonoBehaviour
     private RectTransform t;
     private Tween myTween;
     private bool repeat;
+    private bool reset;
     private void Awake() => t = GetComponent<RectTransform>();
 
-    public void SetRepeat(bool state) => repeat = state;
+    public void Repeat(bool state) => repeat = state;
+    public void Reset(bool state) => reset = state;
 
     public void Animate()
     {
@@ -32,6 +34,7 @@ public class PanelAnimation : MonoBehaviour
 
         myTween = mTween.NewTween(1f)
             .Repeat(repeat)
+            .RestoreOnCancel(reset)
             .MoveTo(t, moveFrom, moveTo, moveCurve)
             .AngleTo(t, angleFrom, angleTo, t.forward, rotateCurve)
             .ScaleTo(t, scaleFrom, scaleTo, scaleCurve)
