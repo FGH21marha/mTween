@@ -25,8 +25,16 @@ public class PanelAnimation : MonoBehaviour
     private bool reset = true;
     private void Awake() => t = GetComponent<RectTransform>();
 
-    public void Repeat(bool state) => repeat = state;
-    public void Reset(bool state) => reset = state;
+    public void Repeat(bool state)
+    {
+        repeat = state;
+        myTween?.Repeat(state);
+    }
+    public void Reset(bool state)
+    {
+        reset = state;
+        myTween?.RestoreOnCancel(state);
+    }
 
     public void Animate()
     {
