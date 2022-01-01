@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 382203894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70085fd8cd1417b4390d7db0d9582693, type: 3}
+  m_Script: {fileID: 11500000, guid: 197f279a748782a4ca6c58d32f16443a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveCurve:
@@ -290,12 +290,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.000844867
-      outSlope: -0.000844867
+      inSlope: -3.1526942
+      outSlope: -3.1526942
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.1363372
+      outWeight: 0.043583535
     - serializedVersion: 3
       time: 0.5
       value: -0.0022239294
@@ -308,11 +308,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0.0006299562
-      outSlope: 0.0006299562
+      inSlope: -3.295181
+      outSlope: -3.295181
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.18284893
+      inWeight: 0.043583512
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -381,17 +381,17 @@ MonoBehaviour:
   gradient:
     serializedVersion: 2
     key0: {r: 0.5019608, g: 0.6431373, b: 0.6431373, a: 1}
-    key1: {r: 0.754717, g: 0.21054772, b: 0.754717, a: 1}
-    key2: {r: 0.7830189, g: 0.5352911, b: 0, a: 0}
-    key3: {r: 0.16673449, g: 0.7830189, b: 0.18123537, a: 0}
+    key1: {r: 0.7264151, g: 0.20265217, b: 0.63279045, a: 1}
+    key2: {r: 0.7169812, g: 0.5358996, b: 0.07150484, a: 0}
+    key3: {r: 0.28830966, g: 0.6698113, b: 0.1868611, a: 0}
     key4: {r: 0.5019608, g: 0.6431373, b: 0.6431373, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 15893
-    ctime2: 32072
-    ctime3: 45817
+    ctime1: 17325
+    ctime2: 32645
+    ctime3: 50972
     ctime4: 65535
     ctime5: 0
     ctime6: 0

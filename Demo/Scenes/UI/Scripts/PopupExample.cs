@@ -5,15 +5,18 @@ public class PopupExample : MonoBehaviour
     public AnimationCurve moveInCurve, moveOutCurve;
     public Vector2 moveFrom, moveTo;
 
-    public CanvasGroup group;
-
+    private CanvasGroup group;
     private RectTransform t;
     private Tween myTween;
 
     bool isAnimating;
     bool isOpen;
 
-    private void Awake() => t = GetComponent<RectTransform>();
+    private void Awake()
+    {
+        group = GetComponent<CanvasGroup>();
+        t = GetComponent<RectTransform>();
+    }
 
     public void Animate()
     {
@@ -27,7 +30,7 @@ public class PopupExample : MonoBehaviour
         float alphafrom = isOpen? 1f : 0f;
         float alphaTo = isOpen ? 0f : 1f;
 
-        myTween = mTween.NewTween(0.6f)
+        myTween = mTween.NewTween(0.3f)
             .MoveTo(t, lastPos, newPos, curve)
             .AlphaTo(group, alphafrom, alphaTo, moveInCurve)
             .SetOnStart(() => isAnimating = true)
