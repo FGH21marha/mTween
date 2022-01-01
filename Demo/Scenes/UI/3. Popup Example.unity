@@ -419,7 +419,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1180617694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af76c9dc8da13f49bef36d43ace1544, type: 3}
+  m_Script: {fileID: 11500000, guid: f5f99871f649be141b35d2526ca8c176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveInCurve:
@@ -428,21 +428,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 5.634584
-      outSlope: 5.634584
+      inSlope: 8.365591
+      outSlope: 8.365591
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.01119186
+      outWeight: 0.021747999
     - serializedVersion: 3
-      time: 0.60066044
-      value: 1.0463454
-      inSlope: -0.966148
-      outSlope: -0.966148
+      time: 0.3742659
+      value: 1.0100992
+      inSlope: -0.6171479
+      outSlope: -0.6171479
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.116273366
+      outWeight: 0.1010558
     - serializedVersion: 3
       time: 1
       value: 1
@@ -468,27 +468,27 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.33145258
-      value: -0.075673155
-      inSlope: -0.75834644
-      outSlope: -0.75834644
+      time: 0.4857136
+      value: -0.032348014
+      inSlope: -0.7618018
+      outSlope: -0.7618018
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.1277161
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 6.046334
-      outSlope: 6.046334
+      inSlope: 5.108113
+      outSlope: 5.108113
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.034554876
+      inWeight: 0.01206398
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  moveFrom: {x: 0, y: -210}
+  moveFrom: {x: 0, y: -200}
   moveTo: {x: 0, y: -70}
   group: {fileID: 1180617699}
 --- !u!114 &1180617697
