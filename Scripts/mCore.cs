@@ -1,22 +1,26 @@
-using System;
-using System.Linq;
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Audio;
+using UnityEngine;
+using System;
 
+/// <summary>
+/// A Tween instance used to interpolate values
+/// </summary>
 [Serializable] public partial class Tween
 {
     string ID;
     public string GetID() => ID;
 
-    Action onStart;
-    Action<float> onUpdate01;
-    Action<float> onUpdateFloat;
-    Action onUpdate;
-    Action onCompletedRun;
-    Action onComplete;
-    Action onCancel;
-    Action onPause;
-    Action onContinue;
+    public Action onStart;
+    public Action<float> onUpdate01;
+    public Action<float> onUpdateFloat;
+    public Action onUpdate;
+    public Action onCompletedRun;
+    public Action onComplete;
+    public Action onCancel;
+    public Action onPause;
+    public Action onContinue;
 
     public float duration;
     public float durationWithDelay;
@@ -43,6 +47,118 @@ using System.Collections.Generic;
     public float max = 1f;
 
     public AnimationCurve curve;
+
+    public Tween GetDuration(out float duration)
+    {
+        duration = this.duration;
+        return this;
+    }
+    public Tween GetDurationWithDelay(out float durationWithDelay)
+    {
+        durationWithDelay = this.durationWithDelay;
+        return this;
+    }
+    public Tween GetProgress(out float progress)
+    {
+        progress = this.progress;
+        return this;
+    }
+    public Tween GetUnscaledProgress(out float unscaledProgress)
+    {
+        unscaledProgress = this.unscaledProgress;
+        return this;
+    }
+    public Tween GetPauseTime(out float pauseTime)
+    {
+        pauseTime = this.pauseTime;
+        return this;
+    }
+    public Tween GetUnscaledPauseTime(out float unscaledPauseTime)
+    {
+        unscaledPauseTime = this.unscaledPauseTime;
+        return this;
+    }
+    public Tween GetIntervalTime(out float intervalTime)
+    {
+        intervalTime = this.intervalTime;
+        return this;
+    }
+    public Tween GetUnscaledIntervalTime(out float unscaledIntervalTime)
+    {
+        unscaledIntervalTime = this.unscaledIntervalTime;
+        return this;
+    }
+    public Tween GetRepeatCount(out int repeatCount)
+    {
+        repeatCount = this.repeatCount;
+        return this;
+    }
+    public Tween GetActiveRepeatCount(out int activeRepeatCount)
+    {
+        activeRepeatCount = this.activeRepeatCount;
+        return this;
+    }
+    public Tween GetCanceled(out bool canceled)
+    {
+        canceled = this.canceled;
+        return this;
+    }
+    public Tween GetPaused(out bool paused)
+    {
+        paused = this.paused;
+        return this;
+    }
+    public Tween GetInterval(out bool interval)
+    {
+        interval = this.interval;
+        return this;
+    }
+    public Tween GetOnInterval(out bool onInterval)
+    {
+        onInterval = this.onInterval;
+        return this;
+    }
+    public Tween GetRepeat(out bool repeat)
+    {
+        repeat = this.repeat;
+        return this;
+    }
+    public Tween GetCompleteTriggeredOnCancel(out bool completeTriggeredOnCancel)
+    {
+        completeTriggeredOnCancel = this.completeTriggeredOnCancel;
+        return this;
+    }
+    public Tween GetCompleteLoopTriggeredOnCancel(out bool completeLoopTriggeredOnCancel)
+    {
+        completeLoopTriggeredOnCancel = this.completeLoopTriggeredOnCancel;
+        return this;
+    }
+    public Tween GetRestoreOnCancel(out bool restoreOnCancel)
+    {
+        restoreOnCancel = this.restoreOnCancel;
+        return this;
+    }
+    public Tween GetMin(out float min)
+    {
+        min = this.min;
+        return this;
+    }
+    public Tween GetMax(out float max)
+    {
+        max = this.max;
+        return this;
+    }
+    public Tween GetMinMax(out float min, out float max)
+    {
+        min = this.min;
+        max = this.max;
+        return this;
+    }
+    public Tween GetCurve(out AnimationCurve curve)
+    {
+        curve = this.curve;
+        return this;
+    }
 
     /// <summary>
     /// Creates a new tween with a duration
@@ -676,7 +792,7 @@ using System.Collections.Generic;
         return this;
     }
 
-    protected struct floatLerp
+    [Serializable] protected struct floatLerp
     {
         public Action<float> a;
         public float start;
@@ -702,9 +818,9 @@ using System.Collections.Generic;
 
         public void Reset() => a?.Invoke(start);
     }
-    protected List<floatLerp> lerpFloat = new List<floatLerp>();
+    [SerializeField] protected List<floatLerp> lerpFloat = new List<floatLerp>();
 
-    protected struct Vector2Lerp
+    [Serializable] protected struct Vector2Lerp
     {
         public Action<Vector2> a;
         public Vector2 start;
@@ -730,9 +846,9 @@ using System.Collections.Generic;
 
         public void Reset() => a?.Invoke(start);
     }
-    protected List<Vector2Lerp> lerpVector2 = new List<Vector2Lerp>();
+    [SerializeField] protected List<Vector2Lerp> lerpVector2 = new List<Vector2Lerp>();
 
-    protected struct Vector3Lerp
+    [Serializable] protected struct Vector3Lerp
     {
         public Action<Vector3> a;
         public Vector3 start;
@@ -758,9 +874,9 @@ using System.Collections.Generic;
 
         public void Reset() => a?.Invoke(start);
     }
-    protected List<Vector3Lerp> lerpVector3 = new List<Vector3Lerp>();
+    [SerializeField] protected List<Vector3Lerp> lerpVector3 = new List<Vector3Lerp>();
 
-    protected struct RotationLerp
+    [Serializable] protected struct RotationLerp
     {
         public Action<Quaternion> a;
         public Quaternion from;
@@ -786,9 +902,9 @@ using System.Collections.Generic;
 
         public void Reset() => a?.Invoke(from);
     }
-    protected List<RotationLerp> lerpRot = new List<RotationLerp>();
+    [SerializeField] protected List<RotationLerp> lerpRot = new List<RotationLerp>();
 
-    protected struct ColorLerp
+    [Serializable] protected struct ColorLerp
     {
         public Action<Color> color;
         public Gradient gradient;
@@ -811,7 +927,7 @@ using System.Collections.Generic;
 
         public void Reset() => color?.Invoke(gradient.colorKeys[0].color);
     }
-    protected List<ColorLerp> lerpColor = new List<ColorLerp>();
+    [SerializeField] protected List<ColorLerp> lerpColor = new List<ColorLerp>();
     protected Gradient GetGradient(Color from, Color to)
     {
         Gradient gradient;
@@ -840,7 +956,7 @@ using System.Collections.Generic;
         gradient.SetKeys(colorKeys, alphaKeys);
         return gradient;
     }
-    protected struct ContinuousTargetLerp
+    [Serializable] protected struct ContinuousTargetLerp
     {
         public Transform transform;
         public Transform target;
@@ -859,9 +975,9 @@ using System.Collections.Generic;
             this.worldUp = WorldUp;
         }
     }
-    protected List<ContinuousTargetLerp> lerpTarget = new List<ContinuousTargetLerp>();
+    [SerializeField] protected List<ContinuousTargetLerp> lerpTarget = new List<ContinuousTargetLerp>();
 
-    protected struct CustomAction
+    [Serializable] protected struct CustomAction
     {
         public float time;
         public Action action;
@@ -880,8 +996,8 @@ using System.Collections.Generic;
             this.scale = scaling;
         }
     }
-    protected List<CustomAction> customActions = new List<CustomAction>();
-    protected List<CustomAction> completedCustomActions = new List<CustomAction>();
+    [SerializeField] protected List<CustomAction> customActions = new List<CustomAction>();
+    [SerializeField] protected List<CustomAction> completedCustomActions = new List<CustomAction>();
 
     /// <summary>
     /// Starts the tween. DO NOT USE
@@ -912,10 +1028,9 @@ using System.Collections.Generic;
     {
         if (canceled) return;
 
-        unscaledProgress += Time.deltaTime;
-
         progress = curve.Evaluate(Remap(unscaledProgress, 0f, duration, min, max));
         progress = Mathf.Clamp(progress, min, max);
+
         onUpdate?.Invoke();
         onUpdate01?.Invoke(curve.Evaluate(Remap(Mathf.Clamp(unscaledProgress, 0f, duration), 0f, duration, 0, 1)));
         onUpdateFloat?.Invoke(progress);
@@ -1040,8 +1155,9 @@ using System.Collections.Generic;
         if (completeLoopTriggeredOnCancel)
             onCompletedRun?.Invoke();
     }
-    public void UpdatePauseTime() => unscaledPauseTime += Time.deltaTime;
-    public void UpdateIntervalTime() => unscaledIntervalTime += Time.deltaTime;
+    public void UpdateTime() => unscaledProgress += Time.unscaledDeltaTime;
+    public void UpdatePauseTime() => unscaledPauseTime += Time.unscaledDeltaTime;
+    public void UpdateIntervalTime() => unscaledIntervalTime += Time.unscaledDeltaTime;
 
     /// <summary>
     /// Add time to the tween duration
@@ -1056,9 +1172,1017 @@ using System.Collections.Generic;
     /// <summary>
     /// Remap the start and end values of tween time
     /// </summary>
-    protected float Remap(float s, float a1, float a2, float b1, float b2)
+    public static float Remap(float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
+    }
+}
+
+/// <summary>
+/// An Audio instance used to play AudioClips
+/// </summary>
+[Serializable] public struct Audio
+{
+    private string ID;
+    private AudioSource source;
+    private List<AudioClip> clips;
+    private float volume;
+    private float time;
+    private Tween tween;
+
+    /// <summary>
+    /// Create new mAudio instance
+    /// </summary>
+    public static Audio NewClip(AudioClip clip)
+    {
+        mAudio.TryGetReference();
+
+        if (clip == null)
+        {
+            Debug.LogError("No clip provided");
+            return new Audio();
+        }
+
+        return new Audio(clip).SetID();
+    }
+    public static Audio NewClip(AudioClip[] clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Length == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID();
+    }
+    public static Audio NewClip(List<AudioClip> clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Count == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID();
+    }
+
+    /// <summary>
+    /// Create new mAudio instance with ID
+    /// </summary>
+    public static Audio NewClip(string ID, AudioClip clip)
+    {
+        mAudio.TryGetReference();
+
+        if (clip == null)
+        {
+            Debug.LogError("No clip provided");
+            return new Audio();
+        }
+
+        return new Audio(clip).SetID(ID);
+    }
+    public static Audio NewClip(string ID, AudioClip[] clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Length == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID(ID);
+    }
+    public static Audio NewClip(string ID, List<AudioClip> clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Count == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID(ID);
+    }
+    public static Audio NewClip(GameObject ID, AudioClip clip)
+    {
+        mAudio.TryGetReference();
+
+        if (clip == null)
+        {
+            Debug.LogError("No clip provided");
+            return new Audio();
+        }
+
+        return new Audio(clip).SetID(ID);
+    }
+    public static Audio NewClip(GameObject ID, AudioClip[] clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Length == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID(ID);
+    }
+    public static Audio NewClip(GameObject ID, List<AudioClip> clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Count == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID(ID);
+    }
+    public static Audio NewClip(object ID, AudioClip clip)
+    {
+        mAudio.TryGetReference();
+
+        if (clip == null)
+        {
+            Debug.LogError("No clip provided");
+            return new Audio();
+        }
+
+        return new Audio(clip).SetID(ID);
+    }
+    public static Audio NewClip(object ID, AudioClip[] clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Length == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID(ID);
+    }
+    public static Audio NewClip(object ID, List<AudioClip> clips)
+    {
+        mAudio.TryGetReference();
+
+        if (clips == null)
+        {
+            Debug.LogError("Clips is null");
+            return new Audio();
+        }
+        else if (clips.Count == 0)
+        {
+            Debug.LogError("Clips does not contain audioclips");
+            return new Audio();
+        }
+
+        return new Audio(clips).SetID(ID);
+    }
+
+    public Audio(AudioClip clip)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        clips = new List<AudioClip>();
+        clips.Add(clip);
+        volume = 1f;
+        time = clip.length;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip clip, float volume)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        clips = new List<AudioClip>();
+        clips.Add(clip);
+        time = clip.length;
+        source.volume = volume;
+        this.volume = volume;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip clip, float volume, float pan)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        clips = new List<AudioClip>();
+        clips.Add(clip);
+        time = clip.length;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip clip, float volume, float pan, float pitch)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        clips = new List<AudioClip>();
+        clips.Add(clip);
+        time = clip.length;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        source.pitch = pitch;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip clip, float volume, float pan, float pitch, bool loop)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        clips = new List<AudioClip>();
+        clips.Add(clip);
+        time = clip.length;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        source.pitch = pitch;
+        source.loop = loop;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip[] clips)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        volume = 1f;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip[] clips, float volume)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip[] clips, float volume, float pan)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip[] clips, float volume, float pan, float pitch)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        source.pitch = pitch;
+        tween = null;
+        ID = null;
+    }
+    public Audio(AudioClip[] clips, float volume, float pan, float pitch, bool loop)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        source.pitch = pitch;
+        source.loop = loop;
+        tween = null;
+        ID = null;
+    }
+    public Audio(List<AudioClip> clips)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        volume = 1f;
+        tween = null;
+        ID = null;
+    }
+    public Audio(List<AudioClip> clips, float volume)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        tween = null;
+        ID = null;
+    }
+    public Audio(List<AudioClip> clips, float volume, float pan)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        tween = null;
+        ID = null;
+    }
+    public Audio(List<AudioClip> clips, float volume, float pan, float pitch)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        source.pitch = pitch;
+        tween = null;
+        ID = null;
+    }
+    public Audio(List<AudioClip> clips, float volume, float pan, float pitch, bool loop)
+    {
+        source = mAudio.instance.GetFirstFreeSource();
+        this.clips = new List<AudioClip>();
+
+        foreach (AudioClip i in clips)
+            this.clips.Add(i);
+
+        time = 1f;
+        source.volume = volume;
+        this.volume = volume;
+        source.panStereo = pan;
+        source.pitch = pitch;
+        source.loop = loop;
+        tween = null;
+        ID = null;
+    }
+
+    /// <summary>
+    /// Sets a unique ID for this clip
+    /// </summary>
+    public Audio SetID()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        System.Random random = new System.Random();
+
+        ID = new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray());
+        return this;
+    }
+    public Audio SetID(string ID)
+    {
+        this.ID = ID;
+        return this;
+    }
+    public Audio SetID(GameObject ID)
+    {
+        this.ID = ID.GetInstanceID().ToString();
+        return this;
+    }
+    public Audio SetID(object ID)
+    {
+        this.ID = ID.ToString();
+        return this;
+    }
+
+    /// <summary>
+    /// Returns the ID of this clip
+    /// </summary>
+    public Audio GetID(out string ID)
+    {
+        ID = this.ID;
+        return this;
+    }
+
+    public enum ChorusOption { Depth, Delay, Rate, Mix }
+    /// <summary>
+    /// Plays the clip with a chorus effect
+    /// </summary>
+    public Audio WithChorus()
+    {
+        source.gameObject.AddComponent<AudioChorusFilter>();
+        return this;
+    }
+    public Audio WithChorus(float value, ChorusOption option)
+    {
+        AudioChorusFilter effect = source.gameObject.AddComponent<AudioChorusFilter>();
+
+        switch (option)
+        {
+            case ChorusOption.Depth: effect.depth = value; break;
+            case ChorusOption.Delay: effect.delay = value; break;
+            case ChorusOption.Rate: effect.rate = value; break;
+            case ChorusOption.Mix: effect.dryMix = value; break;
+            default: break;
+        }
+
+        return this;
+    }
+    public Audio GetChorus(out AudioChorusFilter chorus)
+    {
+        chorus = source.gameObject.GetComponent<AudioChorusFilter>();
+        return this;
+    }
+
+    public enum LowPassOption { Frequency, Resonance }
+    /// <summary>
+    /// Plays the clip with a lowpass effect
+    /// </summary>
+    public Audio WithLowPass(float value)
+    {
+        AudioLowPassFilter effect = source.gameObject.AddComponent<AudioLowPassFilter>();
+        effect.cutoffFrequency = value;
+
+        return this;
+    }
+    public Audio WithLowPass(float value, LowPassOption option)
+    {
+        AudioLowPassFilter effect = source.gameObject.AddComponent<AudioLowPassFilter>();
+
+        switch (option)
+        {
+            case LowPassOption.Frequency: effect.cutoffFrequency = value; break;
+            case LowPassOption.Resonance: effect.lowpassResonanceQ = value; break;
+            default: break;
+        }
+
+        return this;
+    }
+    public Audio GetLowPass(out AudioLowPassFilter lowPass)
+    {
+        lowPass = source.gameObject.GetComponent<AudioLowPassFilter>();
+        return this;
+    }
+
+    public enum HighPassOption { Frequency, Resonance }
+    /// <summary>
+    /// Plays the clip with a highpass effect
+    /// </summary>
+    public Audio WithHighPass(float value)
+    {
+        AudioHighPassFilter effect = source.gameObject.AddComponent<AudioHighPassFilter>();
+        effect.cutoffFrequency = value;
+
+        return this;
+    }
+    public Audio WithHighPass(float value, HighPassOption option)
+    {
+        AudioHighPassFilter effect = source.gameObject.AddComponent<AudioHighPassFilter>();
+
+        switch (option)
+        {
+            case HighPassOption.Frequency: effect.cutoffFrequency = value; break;
+            case HighPassOption.Resonance: effect.highpassResonanceQ = value; break;
+            default: break;
+        }
+
+        return this;
+    }
+    public Audio GetHighPass(out AudioHighPassFilter highPass)
+    {
+        highPass = source.gameObject.GetComponent<AudioHighPassFilter>();
+        return this;
+    }
+
+    public enum EchoOption { Delay, DecayRatio, Mix }
+    /// <summary>
+    /// Plays the clip with a echo effect
+    /// </summary>
+    public Audio WithEcho(float value)
+    {
+        AudioEchoFilter effect = source.gameObject.AddComponent<AudioEchoFilter>();
+        effect.delay = value;
+
+        return this;
+    }
+    public Audio WithEcho(float value, EchoOption option)
+    {
+        AudioEchoFilter effect = source.gameObject.AddComponent<AudioEchoFilter>();
+
+        switch (option)
+        {
+            case EchoOption.Mix: effect.dryMix = value; break;
+            case EchoOption.Delay: effect.delay = value; break;
+            case EchoOption.DecayRatio: effect.decayRatio = value; break;
+            default: break;
+        }
+
+        return this;
+    }
+    public Audio GetEcho(out AudioEchoFilter echo)
+    {
+        echo = source.gameObject.GetComponent<AudioEchoFilter>();
+        return this;
+    }
+
+    public enum ReverbOption { Decay, Density, Diffusion, Mix }
+    /// <summary>
+    /// Plays the clip with a reverb effect
+    /// </summary>
+    public Audio WithReverb(float value)
+    {
+        AudioReverbFilter effect = source.gameObject.AddComponent<AudioReverbFilter>();
+        effect.decayTime = value;
+
+        return this;
+    }
+    public Audio WithReverb(float value, ReverbOption option)
+    {
+        AudioReverbFilter effect = source.gameObject.AddComponent<AudioReverbFilter>();
+
+        switch (option)
+        {
+            case ReverbOption.Decay: effect.decayTime = value; break;
+            case ReverbOption.Density: effect.density = value; break;
+            default: break;
+        }
+
+        return this;
+    }
+    public Audio GetReverb(out AudioReverbFilter reverb)
+    {
+        reverb = source.gameObject.GetComponent<AudioReverbFilter>();
+        return this;
+    }
+
+    /// <summary>
+    /// Plays the clip at position
+    /// </summary>
+    public Audio AtPosition(Vector3 position)
+    {
+        source.transform.position = position;
+        return this;
+    }
+    /// <summary>
+    /// Plays the clip at position in local space
+    /// </summary>
+    public Audio AtLocalPosition(Vector3 position)
+    {
+        source.transform.localPosition = position;
+        return this;
+    }
+
+    /// <summary>
+    /// Set the volume of this instance
+    /// </summary>
+    public Audio SetVolume(float volume)
+    {
+        this.volume = volume;
+        source.volume = volume;
+        return this;
+    }
+    /// <summary>
+    /// Set the stereo pan of this instance
+    /// </summary>
+    public Audio SetPan(float pan)
+    {
+        source.panStereo = pan;
+        return this;
+    }
+    /// <summary>
+    /// Set the pitch of this instance
+    /// </summary>
+    public Audio SetPitch(float pitch)
+    {
+        source.pitch = pitch;
+        return this;
+    }
+    /// <summary>
+    /// Loops this instance
+    /// </summary>
+    public Audio SetLoop()
+    {
+        source.loop = true;
+        tween.Repeat();
+        return this;
+    }
+    public Audio SetLoop(bool state)
+    {
+        source.loop = state;
+        tween.Repeat();
+        return this;
+    }
+    /// <summary>
+    /// Set the output mixergroup of this instance
+    /// </summary>
+    public Audio SetOutput(AudioMixerGroup output)
+    {
+        source.outputAudioMixerGroup = output;
+        return this;
+    }
+    /// <summary>
+    /// Sets the spatial blend for this instance
+    /// </summary>
+    public Audio SetSpatialBlend(float spatial)
+    {
+        source.spatialBlend = spatial;
+        return this;
+    }
+    /// <summary>
+    /// Sets the rolloff curve for this clip
+    /// </summary>
+    public Audio SetRolloff(AnimationCurve curve)
+    {
+        source.rolloffMode = AudioRolloffMode.Custom;
+        source.SetCustomCurve(AudioSourceCurveType.CustomRolloff, curve);
+        return this;
+    }
+    public Audio SetRolloff(AnimationCurve curve, float maxDistance)
+    {
+        source.rolloffMode = AudioRolloffMode.Custom;
+        source.SetCustomCurve(AudioSourceCurveType.CustomRolloff, curve);
+        source.maxDistance = maxDistance;
+        return this;
+    }
+    /// <summary>
+    /// Sets the max distance for this clip
+    /// </summary>
+    public Audio SetMaxDistance(float distance)
+    {
+        source.maxDistance = distance;
+        return this;
+    }
+
+    /// <summary>
+    /// Returns the duration of this clip
+    /// </summary>
+    public Audio GetDuration(out float duration)
+    {
+        duration = time;
+        return this;
+    }
+    /// <summary>
+    /// Returns the volume of this clip
+    /// </summary>
+    public Audio GetVolume(out float volume)
+    {
+        volume = source.volume;
+        return this;
+    }
+    /// <summary>
+    /// Returns the pitch of this clip
+    /// </summary>
+    public Audio GetPitch(out float pitch)
+    {
+        pitch = source.pitch;
+        return this;
+    }
+    /// <summary>
+    /// Returns the stereoPan of this clip
+    /// </summary>
+    public Audio GetPan(out float pan)
+    {
+        pan = source.panStereo;
+        return this;
+    }
+    /// <summary>
+    /// Returns the spatialBlend of this clip
+    /// </summary>
+    public Audio GetSpatialBlend(out float spatialBlend)
+    {
+        spatialBlend = source.spatialBlend;
+        return this;
+    }
+    /// <summary>
+    /// Returns the AudioSource of this clip
+    /// </summary>
+    public Audio GetAudioSource(out AudioSource source)
+    {
+        source = this.source;
+        return this;
+    }
+    /// <summary>
+    /// Returns the AudioClip of this clip
+    /// </summary>
+    public Audio GetAudioClip(out AudioClip clip)
+    {
+        clip = source.clip;
+        return this;
+    }
+
+    /// <summary>
+    /// Set random pitch of this instance
+    /// </summary>
+    public Audio RandomPitch()
+    {
+        source.pitch = UnityEngine.Random.Range(0f, 1f);
+        return this;
+    }
+    /// <summary>
+    /// Set random pitch of this instance, min is clip pitch - range, max is clip pitch + range
+    /// </summary>
+    public Audio RandomPitch(float range)
+    {
+        source.pitch = UnityEngine.Random.Range(source.pitch + -range, source.pitch + range);
+        return this;
+    }
+    /// <summary>
+    /// Set random pitch of this instance between min and max
+    /// </summary>
+    public Audio RandomPitch(float min, float max)
+    {
+        source.pitch = UnityEngine.Random.Range(min, max);
+        return this;
+    }
+    /// <summary>
+    /// Set random pitch of this instance based on a probability curve
+    /// </summary>
+    public Audio RandomPitch(AnimationCurve probability)
+    {
+        source.pitch = probability.Evaluate(UnityEngine.Random.Range(0f, 1f));
+        return this;
+    }
+    /// <summary>
+    /// Set random pitch of this instance based on a probability curve, min is clip pitch - range, max is clip pitch + range
+    /// </summary>
+    public Audio RandomPitch(float range, AnimationCurve probability)
+    {
+        float value = probability.Evaluate(UnityEngine.Random.Range(0f, 1f));
+        source.pitch = Tween.Remap(value, 0f, 1f, source.pitch - range, source.pitch + range);
+        return this;
+    }
+    /// <summary>
+    /// Set random pitch of this instance based on a probability curve scaled by min and max
+    /// </summary>
+    public Audio RandomPitch(float min, float max, AnimationCurve probability)
+    {
+        float value = probability.Evaluate(UnityEngine.Random.Range(0f, 1f));
+        source.pitch = Tween.Remap(value, 0f, 1f, min, max);
+        return this;
+    }
+
+    /// <summary>
+    /// Set random volume of this instance
+    /// </summary>
+    public Audio RandomVolume()
+    {
+        source.volume = UnityEngine.Random.Range(0f, 1f);
+        return this;
+    }
+    /// <summary>
+    /// Set random volume of this instance, min is clip volume - range, max is clip volume + range
+    /// </summary>
+    public Audio RandomVolume(float range)
+    {
+        source.volume = UnityEngine.Random.Range(source.volume + -range, source.volume + range);
+        return this;
+    }
+    /// <summary>
+    /// Set random volume of this instance between min and max
+    /// </summary>
+    public Audio RandomVolume(float min, float max)
+    {
+        source.volume = UnityEngine.Random.Range(min, max);
+        return this;
+    }
+    /// <summary>
+    /// Set random volume of this instance based on a probability curve
+    /// </summary>
+    public Audio RandomVolume(AnimationCurve probability)
+    {
+        source.volume = probability.Evaluate(UnityEngine.Random.Range(0f, 1f));
+        return this;
+    }
+    /// <summary>
+    /// Set random volume of this instance based on a probability curve, min is clip volume - range, max is clip volume + range
+    /// </summary>
+    public Audio RandomVolume(float range, AnimationCurve probability)
+    {
+        float value = probability.Evaluate(UnityEngine.Random.Range(0f, 1f));
+        source.volume = Tween.Remap(value, 0f, 1f, source.volume - range, source.volume + range);
+        return this;
+    }
+    /// <summary>
+    /// Set random volume of this instance based on a probability curve scaled by min and max
+    /// </summary>
+    public Audio RandomVolume(float min, float max, AnimationCurve probability)
+    {
+        float value = probability.Evaluate(UnityEngine.Random.Range(0f, 1f));
+        source.volume = Tween.Remap(value, 0f, 1f, min, max);
+        return this;
+    }
+
+    /// <summary>
+    /// Fades the current clip for seconds going from 0 to volume
+    /// </summary>
+    public Audio FadeIn(float seconds)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, 0f, volume);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds going from 0 to volume based on curve
+    /// </summary>
+    public Audio FadeIn(float seconds, AnimationCurve curve)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, 0f, volume, curve);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds towards to
+    /// </summary>
+    public Audio Fade(float seconds, float to)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, source.volume, to);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds going from towards to
+    /// </summary>
+    public Audio Fade(float seconds, float from, float to)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, from, to);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds towards to based on curve
+    /// </summary>
+    public Audio Fade(float seconds, float to, AnimationCurve curve)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, 0f, to, curve);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds going from towards to based on curve
+    /// </summary>
+    public Audio Fade(float seconds, float from, float to, AnimationCurve curve)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, from, to, curve);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds towards 0
+    /// </summary>
+    public Audio FadeOut(float seconds)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, source.volume, 0f);
+        return this;
+    }
+    /// <summary>
+    /// Fades the current clip for seconds towards 0 based on curve
+    /// </summary>
+    public Audio FadeOut(float seconds, AnimationCurve curve)
+    {
+        mTween.NewTween(seconds).VolumeTo(source, source.volume, 0f, curve);
+        return this;
+    }
+
+    /// <summary>
+    /// Plays the first assigned clip
+    /// </summary>
+    public Audio Play()
+    {
+        source.clip = clips[0];
+        time = source.clip.length * 1 / source.pitch;
+        tween = mTween.NewTween(time + 0.1f).SetOnComplete(Dispose);
+        source.Play();
+        return this;
+    }
+    /// <summary>
+    /// Plays a randomly selected clip from the assigned clips list
+    /// </summary>
+    public Audio PlayRandom()
+    {
+        int i = UnityEngine.Random.Range(0, clips.Count);
+        source.clip = clips[i];
+        time = source.clip.length * 1 / source.pitch;
+        tween = mTween.NewTween(time + 0.1f).SetOnComplete(Dispose);
+        source.Play();
+        return this;
+    }
+    /// <summary>
+    /// Plays the first assigned clip
+    /// </summary>
+    public Audio PlayOneShot()
+    {
+        source.PlayOneShot(clips[0]);
+        return this;
+    }
+    /// <summary>
+    /// Plays a randomly selected clip from the assigned clips list
+    /// </summary>
+    public Audio PlayOneShotRandom()
+    {
+        int i = UnityEngine.Random.Range(0, clips.Count);
+        source.clip = clips[i];
+        source.PlayOneShot(clips[i]);
+        return this;
+    }
+    /// <summary>
+    /// Stops the current clip from playing
+    /// </summary>
+    public Audio Stop()
+    {
+        mTween.NewTween(0.1f).VolumeTo(source, volume, 0f).SetOnComplete(StopThis);
+        return this;
+    }
+    /// <summary>
+    /// Pauses the current clip
+    /// </summary>
+    public Audio Pause()
+    {
+        mTween.NewTween(0.1f).VolumeTo(source, volume, 0f).SetOnComplete(PauseThis);
+        return this;
+    }
+    /// <summary>
+    /// Resumes the current clip
+    /// </summary>
+    public Audio Resume()
+    {
+        tween.Resume();
+        source.UnPause();
+        mTween.NewTween(0.1f).VolumeTo(source, 0f, volume);
+        return this;
+    }
+
+    private void StopThis()
+    {
+        source.Stop();
+        tween.Cancel();
+    }
+    private void PauseThis()
+    {
+        source.Pause();
+        tween.Pause();
+    }
+    private void Dispose()
+    {
+        mAudio.instance.Dispose(source);
     }
 }
 
