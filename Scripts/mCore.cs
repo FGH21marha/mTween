@@ -30,6 +30,7 @@ using System;
     public float unscaledPauseTime;
     public float intervalTime;
     public float unscaledIntervalTime;
+    public float speedMultiplier;
 
     public int repeatCount;
     public int activeRepeatCount;
@@ -86,6 +87,11 @@ using System;
     public Tween GetUnscaledIntervalTime(out float unscaledIntervalTime)
     {
         unscaledIntervalTime = this.unscaledIntervalTime;
+        return this;
+    }
+    public Tween GetSpeedMultiplier(out float speedMultiplier)
+    {
+        speedMultiplier = this.speedMultiplier;
         return this;
     }
     public Tween GetRepeatCount(out int repeatCount)
@@ -163,6 +169,42 @@ using System;
     /// <summary>
     /// Creates a new tween with a duration
     /// </summary>
+    public Tween()
+    {
+        curve = new AnimationCurve();
+        curve.AddKey(0f, 0f);
+        curve.AddKey(1f, 1f);
+        durationWithDelay = 0;
+        unscaledProgress = 0f;
+        speedMultiplier = 1f;
+    }
+    public Tween(GameObject id)
+    {
+        curve = new AnimationCurve();
+        curve.AddKey(0f, 0f);
+        curve.AddKey(1f, 1f);
+        ID = id.GetInstanceID().ToString();
+        unscaledProgress = 0f;
+        speedMultiplier = 1f;
+    }
+    public Tween(string id)
+    {
+        curve = new AnimationCurve();
+        curve.AddKey(0f, 0f);
+        curve.AddKey(1f, 1f);
+        ID = id;
+        unscaledProgress = 0f;
+        speedMultiplier = 1f;
+    }
+    public Tween(object id)
+    {
+        curve = new AnimationCurve();
+        curve.AddKey(0f, 0f);
+        curve.AddKey(1f, 1f);
+        ID = id.ToString();
+        unscaledProgress = 0f;
+        speedMultiplier = 1f;
+    }
     public Tween(float duration)
     {
         curve = new AnimationCurve();
@@ -171,6 +213,7 @@ using System;
         this.duration = duration;
         durationWithDelay = duration;
         unscaledProgress = 0f;
+        speedMultiplier = 1f;
     }
     public Tween(GameObject id, float duration)
     {
@@ -181,6 +224,7 @@ using System;
         durationWithDelay = duration;
         ID = id.GetInstanceID().ToString();
         unscaledProgress = 0f;
+        speedMultiplier = 1f;
     }
     public Tween(string id, float duration)
     {
@@ -191,6 +235,7 @@ using System;
         durationWithDelay = duration;
         ID = id;
         unscaledProgress = 0f;
+        speedMultiplier = 1f;
     }
     public Tween(object id, float duration)
     {
@@ -201,6 +246,7 @@ using System;
         durationWithDelay = duration;
         ID = id.ToString();
         unscaledProgress = 0f;
+        speedMultiplier = 1f;
     }
 
     /// <summary>
@@ -403,6 +449,15 @@ using System;
     }
 
     /// <summary>
+    /// Multiplies the tween's update speed
+    /// </summary>
+    public Tween SetSpeedMultiplier(float speedMultiplier)
+    {
+        this.speedMultiplier = speedMultiplier;
+        return this;
+    }
+
+    /// <summary>
     /// Restore the state of the tweened object when the tween is canceled
     /// </summary>
     public Tween RestoreOnCancel()
@@ -440,6 +495,15 @@ using System;
     public Tween SetID(object id)
     {
         ID = id.ToString();
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the duration of the tween
+    /// </summary>
+    public Tween SetDuration(float duration)
+    {
+        this.duration = duration;
         return this;
     }
 
@@ -928,6 +992,22 @@ using System;
         public void Reset() => color?.Invoke(gradient.colorKeys[0].color);
     }
     [SerializeField] protected List<ColorLerp> lerpColor = new List<ColorLerp>();
+
+    /// <summary>
+    /// Used to add new keyframes to ColorLerp gradient
+    /// </summary>
+    [Serializable] public struct ColorTimes
+    {
+        public Color color;
+        public float time;
+
+        public ColorTimes(Color c, float t)
+        {
+            this.color = c;
+            this.time = t;
+        }
+    }
+
     protected Gradient GetGradient(Color from, Color to)
     {
         Gradient gradient;
@@ -1155,9 +1235,9 @@ using System;
         if (completeLoopTriggeredOnCancel)
             onCompletedRun?.Invoke();
     }
-    public void UpdateTime() => unscaledProgress += Time.unscaledDeltaTime;
+    public void UpdateTime() => unscaledProgress += Time.unscaledDeltaTime * speedMultiplier;
     public void UpdatePauseTime() => unscaledPauseTime += Time.unscaledDeltaTime;
-    public void UpdateIntervalTime() => unscaledIntervalTime += Time.unscaledDeltaTime;
+    public void UpdateIntervalTime() => unscaledIntervalTime += Time.unscaledDeltaTime * speedMultiplier;
 
     /// <summary>
     /// Add time to the tween duration
@@ -2183,20 +2263,5 @@ using System;
     private void Dispose()
     {
         mAudio.instance.Dispose(source);
-    }
-}
-
-/// <summary>
-/// Used to add new keyframes to ColorLerp gradient
-/// </summary>
-[Serializable] public struct ColorTimes
-{
-    public Color color;
-    public float time;
-
-    public ColorTimes(Color c, float t)
-    {
-        this.color = c;
-        this.time = t;
     }
 }
