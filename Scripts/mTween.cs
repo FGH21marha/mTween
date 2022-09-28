@@ -49,6 +49,11 @@ public class mTween : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        CancelAllTweens();
+    }
+
     void LateUpdate() => StartCoroutine(LateLateUpdate());
     private IEnumerator LateLateUpdate()
     {
@@ -60,13 +65,16 @@ public class mTween : MonoBehaviour
         if (instance == null)
         {
             GameObject t = new GameObject("mTween");
-            t.hideFlags = HideFlags.HideInHierarchy;
             mTween x = t.AddComponent<mTween>();
             instance = x;
+            instance.hideFlags = HideFlags.None;
             return x;
         }
         else
+        {
+            instance.hideFlags = HideFlags.None;
             return instance;
+        }
     }
 
 #endregion
@@ -193,6 +201,19 @@ public class mTween : MonoBehaviour
         CreateNewInstance();
 
         Tween i = new Tween(id, time).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+
+    /// <summary>
+    /// Triggers an action a frame later
+    /// </summary>
+    public static Tween WaitForNextFrame(Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(0f).SetOnComplete(OnComplete);
         activeTweens.Add(i);
 
         return i;
