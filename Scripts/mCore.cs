@@ -268,6 +268,13 @@ using System;
     }
     public Tween Repeat(int n)
     {
+        if(n == 0)
+        {
+            repeat = false;
+            repeatCount = n;
+            return this;
+        }
+
         repeat = true;
         repeatCount = n;
         return this;
@@ -1104,6 +1111,10 @@ using System;
     {
         onCompletedRun?.Invoke();
     }
+
+    /// <summary>
+    /// Updates tween. DO NOT USE
+    /// </summary>
     public void Update()
     {
         if (canceled) return;
