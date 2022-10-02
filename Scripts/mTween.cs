@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("mTween/mTween/mTween")]
+[AddComponentMenu("")]
 public class mTween : MonoBehaviour
 {
     #region Monobehaviour
@@ -31,7 +31,10 @@ public class mTween : MonoBehaviour
         if (instance == null)
         {
             if (GameObject.Find("mTween"))
+            {
                 instance = this;
+                instance.hideFlags = HideFlags.None;
+            }
             else
                 instance = CreateNewInstance();
         }
@@ -162,14 +165,12 @@ public class mTween : MonoBehaviour
 
     #endregion
 
-    #region NiceToHaves
-
     #region DelayedCall
 
     /// <summary>
     /// Triggers an action after x amount of time
     /// </summary>
-    public static Tween DelayedCall(Action OnComplete, float time)
+    public static Tween DelayedCall(float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -178,7 +179,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween DelayedCall(GameObject id, Action OnComplete, float time)
+    public static Tween DelayedCall(GameObject id, float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -187,7 +188,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween DelayedCall(string id, Action OnComplete, float time)
+    public static Tween DelayedCall(string id, float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -196,7 +197,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween DelayedCall(object id, Action OnComplete, float time)
+    public static Tween DelayedCall(object id, float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -262,7 +263,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(float a, float b, float time, Action<float> OnUpdate, AnimationCurve curve)
+    public static Tween value(float a, float b, float time, AnimationCurve curve, Action<float> OnUpdate)
     {
         CreateNewInstance();
 
@@ -271,7 +272,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(GameObject id, float a, float b, float time, Action<float> OnUpdate, AnimationCurve curve)
+    public static Tween value(GameObject id, float a, float b, float time, AnimationCurve curve, Action<float> OnUpdate)
     {
         CreateNewInstance();
 
@@ -280,7 +281,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(string id, float a, float b, float time, Action<float> OnUpdate, AnimationCurve curve)
+    public static Tween value(string id, float a, float b, float time, AnimationCurve curve, Action<float> OnUpdate)
     {
         CreateNewInstance();
 
@@ -289,7 +290,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(object id, float a, float b, float time, Action<float> OnUpdate, AnimationCurve curve)
+    public static Tween value(object id, float a, float b, float time, AnimationCurve curve, Action<float> OnUpdate)
     {
         CreateNewInstance();
 
@@ -335,7 +336,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(Vector2 a, Vector2 b, float time, Action<Vector2> OnUpdate, AnimationCurve curve)
+    public static Tween value(Vector2 a, Vector2 b, float time, AnimationCurve curve, Action<Vector2> OnUpdate)
     {
         CreateNewInstance();
 
@@ -344,7 +345,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(GameObject id, Vector2 a, Vector2 b, float time, Action<Vector2> OnUpdate, AnimationCurve curve)
+    public static Tween value(GameObject id, Vector2 a, Vector2 b, float time, AnimationCurve curve, Action<Vector2> OnUpdate)
     {
         CreateNewInstance();
 
@@ -353,7 +354,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(string id, Vector2 a, Vector2 b, float time, Action<Vector2> OnUpdate, AnimationCurve curve)
+    public static Tween value(string id, Vector2 a, Vector2 b, float time, AnimationCurve curve, Action<Vector2> OnUpdate)
     {
         CreateNewInstance();
 
@@ -362,7 +363,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(object id, Vector2 a, Vector2 b, float time, Action<Vector2> OnUpdate, AnimationCurve curve)
+    public static Tween value(object id, Vector2 a, Vector2 b, float time, AnimationCurve curve, Action<Vector2> OnUpdate)
     {
         CreateNewInstance();
 
@@ -408,7 +409,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(Vector3 a, Vector3 b, float time, Action<Vector3> OnUpdate, AnimationCurve curve)
+    public static Tween value(Vector3 a, Vector3 b, float time, AnimationCurve curve, Action<Vector3> OnUpdate)
     {
         CreateNewInstance();
 
@@ -417,7 +418,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(GameObject id, Vector3 a, Vector3 b, float time, Action<Vector3> OnUpdate, AnimationCurve curve)
+    public static Tween value(GameObject id, Vector3 a, Vector3 b, float time, AnimationCurve curve, Action<Vector3> OnUpdate)
     {
         CreateNewInstance();
 
@@ -426,7 +427,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(string id, Vector3 a, Vector3 b, float time, Action<Vector3> OnUpdate, AnimationCurve curve)
+    public static Tween value(string id, Vector3 a, Vector3 b, float time, AnimationCurve curve, Action<Vector3> OnUpdate)
     {
         CreateNewInstance();
 
@@ -435,11 +436,84 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(object id, Vector3 a, Vector3 b, float time, Action<Vector3> OnUpdate, AnimationCurve curve)
+    public static Tween value(object id, Vector3 a, Vector3 b, float time, AnimationCurve curve, Action<Vector3> OnUpdate)
     {
         CreateNewInstance();
 
         Tween i = new Tween(id, time).LerpVector3(OnUpdate, a, b, curve);
+        activeTweens.Add(i);
+
+        return i;
+    }
+
+    public static Tween value(Quaternion a, Quaternion b, float time, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(time).LerpQuaternion(OnUpdate, a, b);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(GameObject id, Quaternion a, Quaternion b, float time, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, time).LerpQuaternion(OnUpdate, a, b);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(string id, Quaternion a, Quaternion b, float time, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, time).LerpQuaternion(OnUpdate, a, b);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(object id, Quaternion a, Quaternion b, float time, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, time).LerpQuaternion(OnUpdate, a, b);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(Quaternion a, Quaternion b, float time, AnimationCurve curve, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(time).LerpQuaternion(OnUpdate, a, b, curve);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(GameObject id, Quaternion a, Quaternion b, float time, AnimationCurve curve, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, time).LerpQuaternion(OnUpdate, a, b, curve);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(string id, Quaternion a, Quaternion b, float time, AnimationCurve curve, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, time).LerpQuaternion(OnUpdate, a, b, curve);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween value(object id, Quaternion a, Quaternion b, float time, AnimationCurve curve, Action<Quaternion> OnUpdate)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, time).LerpQuaternion(OnUpdate, a, b, curve);
         activeTweens.Add(i);
 
         return i;
@@ -481,7 +555,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(Color a, Color b, float time, Action<Color> OnUpdate, AnimationCurve curve)
+    public static Tween value(Color a, Color b, float time, AnimationCurve curve, Action<Color> OnUpdate)
     {
         CreateNewInstance();
 
@@ -490,7 +564,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(GameObject id, Color a, Color b, float time, Action<Color> OnUpdate, AnimationCurve curve)
+    public static Tween value(GameObject id, Color a, Color b, float time, AnimationCurve curve, Action<Color> OnUpdate)
     {
         CreateNewInstance();
 
@@ -499,7 +573,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(string id, Color a, Color b, float time, Action<Color> OnUpdate, AnimationCurve curve)
+    public static Tween value(string id, Color a, Color b, float time, AnimationCurve curve, Action<Color> OnUpdate)
     {
         CreateNewInstance();
 
@@ -508,7 +582,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(object id, Color a, Color b, float time, Action<Color> OnUpdate, AnimationCurve curve)
+    public static Tween value(object id, Color a, Color b, float time, AnimationCurve curve, Action<Color> OnUpdate)
     {
         CreateNewInstance();
 
@@ -633,8 +707,6 @@ public class mTween : MonoBehaviour
 
         return sequence;
     }
-
-    #endregion
 
     #endregion
 
