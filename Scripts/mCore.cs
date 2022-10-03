@@ -49,6 +49,8 @@ using System;
 
     public AnimationCurve curve;
 
+    public Func<bool> conditionMet;
+
     public Tween GetDuration(out float duration)
     {
         duration = this.duration;
@@ -542,6 +544,12 @@ using System;
         if (t >= 0f && a != null)
             customActions.Add(new CustomAction(t, a, scaling));
 
+        return this;
+    }
+
+    public Tween SetWaitUntilCondition(Func<bool> condition)
+    {
+        conditionMet = condition;
         return this;
     }
 
