@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [AddComponentMenu("")]
@@ -80,7 +81,7 @@ public class mTween : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
     #region New Tween Instance
 
@@ -170,7 +171,7 @@ public class mTween : MonoBehaviour
     /// <summary>
     /// Triggers an action after x amount of time
     /// </summary>
-    public static Tween DelayedCall(float time, Action OnComplete)
+    public static Tween WaitForSeconds(float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -179,7 +180,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween DelayedCall(GameObject id, float time, Action OnComplete)
+    public static Tween WaitForSeconds(GameObject id, float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -188,7 +189,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween DelayedCall(string id, float time, Action OnComplete)
+    public static Tween WaitForSeconds(string id, float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -197,7 +198,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween DelayedCall(object id, float time, Action OnComplete)
+    public static Tween WaitForSeconds(object id, float time, Action OnComplete)
     {
         CreateNewInstance();
 
@@ -215,6 +216,73 @@ public class mTween : MonoBehaviour
         CreateNewInstance();
 
         Tween i = new Tween(0f).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween WaitForNextFrame(GameObject id, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, 0f).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween WaitForNextFrame(string id, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, 0f).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween WaitForNextFrame(object id, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, 0f).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+
+    /// <summary>
+    /// Triggers an action after a condition has been met
+    /// </summary>
+    public static Tween WaitUntil(Func<bool> waitUntil, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(Mathf.Infinity).SetWaitUntilCondition(waitUntil).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween WaitUntil(GameObject id, Func<bool> waitUntil, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, Mathf.Infinity).SetWaitUntilCondition(waitUntil).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween WaitUntil(string id, Func<bool> waitUntil, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, Mathf.Infinity).SetWaitUntilCondition(waitUntil).SetOnComplete(OnComplete);
+        activeTweens.Add(i);
+
+        return i;
+    }
+    public static Tween WaitUntil(object id, Func<bool> waitUntil, Action OnComplete)
+    {
+        CreateNewInstance();
+
+        Tween i = new Tween(id, Mathf.Infinity).SetWaitUntilCondition(waitUntil).SetOnComplete(OnComplete);
         activeTweens.Add(i);
 
         return i;
@@ -1055,6 +1123,13 @@ public class mTween : MonoBehaviour
                 activeTweens[i].unscaledProgress = activeTweens[i].durationWithDelay;
 
                 //Call Complete and remove self from active tweens
+                activeTweens[i].Complete();
+                activeTweens.Remove(activeTweens[i]);
+                continue;
+            }
+
+            if (activeTweens[i].conditionMet.Invoke())
+            {
                 activeTweens[i].Complete();
                 activeTweens.Remove(activeTweens[i]);
                 continue;
