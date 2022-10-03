@@ -1128,11 +1128,17 @@ public class mTween : MonoBehaviour
                 continue;
             }
 
-            if (activeTweens[i].conditionMet.Invoke())
+            //Check if WaitUntil condition has been met
+            if(activeTweens[i].conditionMet != null)
             {
-                activeTweens[i].Complete();
-                activeTweens.Remove(activeTweens[i]);
-                continue;
+                //Get the value of this condition
+                if (activeTweens[i].conditionMet.Invoke())
+                {
+                    //Call Complete and remove self from active tweens
+                    activeTweens[i].Complete();
+                    activeTweens.Remove(activeTweens[i]);
+                    continue;
+                }
             }
 
             //Update time of active tweens
