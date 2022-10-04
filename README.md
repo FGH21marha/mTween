@@ -1,2 +1,2 @@
 # mTween
-Tweening library for unity
+A simple to use tweening engine for unity
