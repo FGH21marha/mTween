@@ -145,6 +145,22 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
 {
     SerializedProperty tweens;
     SerializedProperty editing;
+
+    private GUISkin tweenSkin;
+    private GUISkin skin
+    {
+        get
+        {
+            if (tweenSkin == null)
+                tweenSkin = Resources.Load<GUISkin>("mTweenSkin");
+
+            if (tweenSkin == null)
+                return GUI.skin;
+            else
+                return tweenSkin;
+        }
+    }
+
     private void OnEnable()
     {
         tweens = serializedObject.FindProperty("tweens");
@@ -155,7 +171,7 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
     {
         Title("mTweener");
 
-        using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
+        using (new EditorGUILayout.HorizontalScope(skin.box))
         {
             EditorGUIUtility.labelWidth = 52;
             EditorGUILayout.PropertyField(tweens.FindPropertyRelative("Array.size"), new GUIContent("Tweens"));
@@ -188,17 +204,13 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
 
                 return;
             }
-
-            if (GUILayout.Button("Edit", GUILayout.Width(36))) editing.boolValue = !editing.boolValue;
         }
 
         if ((target as mTweener).tweens == null || (target as mTweener).tweens.Length <= 0) return;
 
         for (int i = 0; i < (target as mTweener).tweens.Length; i++)
         {
-            EditorGUILayout.Space(2);
-
-            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+            using (new GUILayout.VerticalScope(skin.box))
             {
                 RenderInterface(i, out bool shouldBreak);
 
@@ -220,30 +232,23 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
         {
             var title = string.IsNullOrEmpty(targ.ID) ? "Tween " + current.ToString() : targ.ID;
 
-            if (GUILayout.Button(title, GetLabelStyle(), GUILayout.Height(18)))
+            if (GUILayout.Button(title, skin.label, GUILayout.Height(18)))
             {
                 targ.isVisible = !targ.isVisible;
             }
-            if (editing.boolValue)
-            {
-                if (GUILayout.Button("-", GUILayout.Height(18), GUILayout.Width(18)))
-                {
-                    tweens.DeleteArrayElementAtIndex(current);
-                    shouldBreak = true;
-                    return;
-                }
-            }
         }
 
-        EditorGUILayout.Space(6);
+        EditorGUILayout.Space(4);
 
         if (!targ.isVisible) return;
 
-        EditorGUILayout.Space(2);
+        EditorGUILayout.Space(4);
 
         //Tween Info
-        using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+        using (new GUILayout.VerticalScope(skin.window))
         {
+            GUILayout.Label("Tween Info");
+
             //Tween Type
             using (new GUILayout.HorizontalScope())
             {
@@ -259,12 +264,11 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
             }
         }
 
-        EditorGUILayout.Space();
-        GUILayout.Label("Tween Options");
-
         //Tween Settings
-        using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+        using (new GUILayout.VerticalScope(skin.window))
         {
+            GUILayout.Label("Tween Options");
+
             targ.showTweenSettings = GUILayout.Toolbar(targ.showTweenSettings, new string[] { "Animation", "Playback" });
 
             if (targ.showTweenSettings == 1)
@@ -328,12 +332,11 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
             }
         }
 
-        EditorGUILayout.Space();
-        GUILayout.Label("Tween Event");
-
         //Tween Events
-        using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+        using (new GUILayout.VerticalScope(skin.window))
         {
+            GUILayout.Label("Tween Events");
+
             switch (targ.tweenType)
             {
                 case TweenerType.Float: RenderTweenEvent(targ, current, "onUpdateFloat"); break;
@@ -342,6 +345,13 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
                 case TweenerType.Rotation: RenderTweenEvent(targ, current, "onUpdateRotation"); break;
                 case TweenerType.Color: RenderTweenEvent(targ, current, "onUpdateColor"); break;
             }
+        }
+
+        if (GUILayout.Button("DeleteTween"))
+        {
+            tweens.DeleteArrayElementAtIndex(current);
+            shouldBreak = true;
+            return;
         }
     }
 
@@ -457,19 +467,7 @@ public enum TweenerType { Float, Vector2, Vector3, Rotation, Color }
         i.normal.textColor = new Color(0.8f, 0.8f, 0.8f, 1);
         i.fontStyle = FontStyle.Bold;
         EditorGUI.LabelField(GUILayoutUtility.GetRect(200, 24), title, i);
-        EditorGUI.DrawRect(GUILayoutUtility.GetRect(1, 1), new Color(0, 0, 0, 0.5f));
-        EditorGUILayout.Space();
-    }
-
-    void TitleSmall(string title)
-    {
-        GUIStyle i = new GUIStyle();
-        i.fontSize = 14;
-        i.alignment = TextAnchor.MiddleLeft;
-        i.normal.textColor = new Color(0.8f, 0.8f, 0.8f, 1);
-        i.fontStyle = FontStyle.Bold;
-        i.contentOffset = Vector2.right * 4;
-        EditorGUI.LabelField(GUILayoutUtility.GetRect(200, 24), title, i);
+        EditorGUI.DrawRect(GUILayoutUtility.GetRect(1, 1), new Color(0.1f, 0.1f, 0.1f, 0.5f));
         EditorGUILayout.Space();
     }
 
