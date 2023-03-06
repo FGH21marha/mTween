@@ -495,7 +495,7 @@ public class mTween : MonoBehaviour
 
         return i;
     }
-    public static Tween value(string id, Vector3 a, Vector3 b, float time, AnimationCurve curve, Action<Vector3> OnUpdate)
+    public static Tween Value(string id, Vector3 a, Vector3 b, float time, AnimationCurve curve, Action<Vector3> OnUpdate)
     {
         CreateNewInstance();
 
